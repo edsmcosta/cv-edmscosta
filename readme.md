@@ -145,7 +145,7 @@ keywords/
 
 ### **Fase 6: Validação e Testes**
 - [x] Implementar JSON Schema reference
-- [ ] Criar schema de validação separado
+- [x] Criar schema de validação separado (`schema.json`)
 - [ ] Testar parsing em ATS reais
 - [ ] Automatizar validação via CI/CD
 
@@ -245,35 +245,6 @@ Estrutura recomendada para integração com ATS específicos:
       "resumeId": "ed-costa-cv-2026",
       "visibility": "public",
       "categories": ["Information Technology", "Data Analysis"]
-    }
-  }
-}
-```
-
-### **JSON Schema de Validação**
-
-Criar arquivo `schema.json` separado para validação automática:
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "required": ["basics", "work", "education", "skills"],
-  "properties": {
-    "basics": {
-      "type": "object",
-      "required": ["name", "email"],
-      "properties": {
-        "name": { "type": "string", "minLength": 1 },
-        "email": { "type": "string", "format": "email" }
-      }
-    },
-    "work": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["name", "position", "startDate"]
-      }
     }
   }
 }
