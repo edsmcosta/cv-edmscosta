@@ -1,0 +1,1174 @@
+{
+  "cv_metadata": {
+    "version": "2.0",
+    "last_updated": "2026-01-17T03:00:00Z",
+    "format": "LaTeX",
+    "language": "pt-BR",
+    "author": "Ed Santana Martins Costa"
+  },
+  "personal_info": {
+    "full_name": "Ed Santana Martins Costa",
+    "first_name": "Ed",
+    "middle_names": "Santana Martins",
+    "last_name": "Costa",
+    "title": "Engenheiro da Computação | Analista e Engenheiro de Dados",
+    "location": {
+      "neighborhood": "Graça",
+      "city": "Salvador",
+      "state": "BA",
+      "country": "Brasil",
+      "formatted": "Graça, Salvador, BA"
+    },
+    "contact": {
+      "phone": "+55 (71) 9 9956-5197",
+      "email": "ed.costa@emcdl.com.br",
+      "linkedin": {
+        "url": "https://linkedin.com/in/edsmcosta",
+        "username": "edsmcosta"
+      },
+      "github": {
+        "url": "https://github.com/edsmcosta",
+        "username": "edsmcosta"
+      }
+    }
+  },
+  "objectives": {
+    "personal": {
+      "summary": "Sou curioso por natureza — adoro aprender, viajar, explorar novas culturas e ter experiências que combinam adrenalina, aprendizagem e crescimento pessoal.",
+      "goal": "Combinar tecnologia, dados e estratégia para impulsionar negócios mais inteligentes, sustentáveis e humanos.",
+      "interests": [
+        "Aprendizado contínuo",
+        "Viagens",
+        "Exploração cultural",
+        "Experiências com adrenalina",
+        "Crescimento pessoal"
+      ]
+    },
+    "professional": {
+      "summary": "Profissional apaixonado por dados, tecnologia, engenharia e melhoria contínua, motivado pelo objetivo de transformar informações em decisões inteligentes e gerar impacto real nas empresas e nas pessoas.",
+      "role": "Analista e Engenheiro de Dados",
+      "focus_areas": [
+        "Integração de processos",
+        "Soluções tecnológicas",
+        "Confiabilidade de sistemas",
+        "Redução de riscos",
+        "Otimização de resultados"
+      ],
+      "core_competencies": [
+        "Extração de dados",
+        "Modelagem de dados",
+        "Análise de dados",
+        "Visualização de dados",
+        "Ambientes dinâmicos",
+        "Trabalho colaborativo",
+        "Orientação para desempenho"
+      ],
+      "current_studies": [
+        "MBA Executivo em Lean Six Sigma Black Belt – Excelência Operacional (BSBr)",
+        "MBA em Engenharia de Segurança Ocupacional (Instituto Laboro - Concluindo)"
+      ]
+    }
+  },
+  "languages": [
+    {
+      "name": "Português",
+      "level": "Nativo",
+      "proficiency": "C2"
+    },
+    {
+      "name": "Inglês",
+      "level": "Avançado",
+      "proficiency": "B2",
+      "certifications": [
+        "Laureate English for Academic Purpose (B2 CEFR)",
+        "Fort Lauderdale Intercâmbio (20 semanas, Upper Intermediate B2)"
+      ]
+    },
+    {
+      "name": "Espanhol",
+      "level": "Básico",
+      "proficiency": "A2"
+    }
+  ],
+  "technical_skills": {
+    "programming_languages": {
+      "expert": [
+        {
+          "name": "Python",
+          "level": "Expert",
+          "color": "red",
+          "years_experience": 8,
+          "contexts": ["Data Analysis", "Backend", "IoT", "Machine Learning", "Automation"]
+        },
+        {
+          "name": "JavaScript",
+          "level": "Expert",
+          "color": "red",
+          "years_experience": 8,
+          "contexts": ["Frontend", "Backend (Node.js)", "Full Stack"]
+        },
+        {
+          "name": "DAX",
+          "level": "Expert",
+          "color": "red",
+          "years_experience": 6,
+          "contexts": ["Power BI", "Data Modeling", "Business Intelligence"]
+        },
+        {
+          "name": "PowerQuery M",
+          "level": "Expert",
+          "color": "red",
+          "years_experience": 6,
+          "contexts": ["ETL", "Data Transformation", "Power BI"]
+        },
+        {
+          "name": "SQL",
+          "level": "Expert",
+          "color": "red",
+          "years_experience": 10,
+          "contexts": ["Database Management", "Data Analysis", "Reporting"]
+        },
+        {
+          "name": "NoSQL (MapReduce)",
+          "level": "Expert",
+          "color": "red",
+          "years_experience": 8,
+          "contexts": ["CouchDB", "MongoDB", "Big Data"]
+        },
+        {
+          "name": "Shell Script",
+          "level": "Expert",
+          "color": "red",
+          "years_experience": 9,
+          "contexts": ["Automation", "DevOps", "System Administration"]
+        }
+      ],
+      "advanced": [
+        {
+          "name": "VBA",
+          "level": "Advanced",
+          "color": "orange",
+          "years_experience": 7,
+          "contexts": ["Excel Automation", "Office Integration"]
+        },
+        {
+          "name": "C#",
+          "level": "Advanced",
+          "color": "orange",
+          "years_experience": 6,
+          "contexts": [".NET", "Desktop Applications", "Web Services"]
+        },
+        {
+          "name": "C",
+          "level": "Advanced",
+          "color": "orange",
+          "years_experience": 8,
+          "contexts": ["Systems Programming", "Embedded Systems"]
+        },
+        {
+          "name": "Java",
+          "level": "Advanced",
+          "color": "orange",
+          "years_experience": 7,
+          "contexts": ["Backend", "Android", "Enterprise Applications"]
+        },
+        {
+          "name": "UML",
+          "level": "Advanced",
+          "color": "orange",
+          "years_experience": 8,
+          "contexts": ["System Design", "Documentation"]
+        },
+        {
+          "name": "Octave",
+          "level": "Advanced",
+          "color": "orange",
+          "years_experience": 5,
+          "contexts": ["Scientific Computing", "Data Analysis"]
+        },
+        {
+          "name": "Arduino",
+          "level": "Advanced",
+          "color": "orange",
+          "years_experience": 6,
+          "contexts": ["IoT", "Embedded Systems", "Prototyping"]
+        }
+      ],
+      "intermediate": [
+        {
+          "name": "PHP",
+          "level": "Intermediate",
+          "color": "yellow",
+          "years_experience": 5,
+          "contexts": ["Web Development", "Backend"]
+        }
+      ],
+      "additional": [
+        "Rust",
+        "HTML5",
+        "CSS3"
+      ]
+    },
+    "frameworks_libraries": {
+      "frontend": [
+        "React.js",
+        "D3.js"
+      ],
+      "backend": [
+        "Node.js",
+        "Express.js",
+        "ASP.NET MVC",
+        ".NET Core"
+      ],
+      "data_science": [
+        "pandas",
+        "scikit-learn",
+        "Kafka"
+      ]
+    },
+    "databases": {
+      "relational": [
+        "SQL Server",
+        "MySQL"
+      ],
+      "nosql": [
+        "MongoDB",
+        "Apache CouchDB"
+      ],
+      "cloud": [
+        "SAP Hana"
+      ]
+    },
+    "bi_analytics": [
+      "Power BI",
+      "Azure Analysis Services",
+      "SAP Business Objects (SAP BO)",
+      "Databricks"
+    ],
+    "cloud_platforms": {
+      "azure": [
+        "Azure Analysis Services",
+        "Azure DevOps",
+        "Azure Services",
+        "Microsoft Fabric"
+      ],
+      "sap": [
+        "SAP BTP (Business Technology Platform)",
+        "SAP Datasphere"
+      ]
+    },
+    "low_code_platforms": [
+      "Microsoft Power Platform",
+      "PowerApps",
+      "PowerAutomate",
+      "SharePoint"
+    ],
+    "devops_tools": [
+      "Docker",
+      "Git",
+      "Azure DevOps (Boards, Repos, Pipelines)",
+      "CI/CD"
+    ],
+    "erp_systems": {
+      "sap": [
+        "SAP R/3 (PP, MM, SD, FI/CO, PM, QM)",
+        "SAP IM (Incident Management)"
+      ]
+    },
+    "other_tools": [
+      "VMWare",
+      "IIS",
+      "HP ALM Center",
+      "Mantis",
+      "Redmine",
+      "Jira"
+    ],
+    "industrial_automation": [
+      "Siemens (S7-500, S7-1500)",
+      "Allen Bradley - Rockwell"
+    ]
+  },
+  "certifications_skills": [
+    {
+      "name": "Microsoft DP-300 (SQL Server Expert)",
+      "status": "Em Andamento",
+      "year": "2025-2026",
+      "institution": "Microsoft"
+    },
+    {
+      "name": "Finanças Corporativas",
+      "status": "Concluído",
+      "year": "2025",
+      "institution": "Pré-MBA SaintPaul"
+    },
+    {
+      "name": "Capacitação em redes 5G",
+      "status": "Concluído",
+      "year": "2023",
+      "institution": "UFBA - Huawei"
+    },
+    {
+      "name": "Six-Sigma Yellow Belt",
+      "status": "Concluído",
+      "year": "2022",
+      "institution": "FM2S Educação e Consultoria"
+    },
+    {
+      "name": "Business Process Model and Notation (BPMN)",
+      "status": "Concluído",
+      "year": "2021",
+      "institution": "DNC.GROUP"
+    },
+    {
+      "name": "Artificial Intelligence Applied to Business",
+      "status": "Concluído",
+      "year": "2017",
+      "institution": "UNIFACS - International Office"
+    },
+    {
+      "name": "Scrum Fundamentals Certified",
+      "status": "Concluído",
+      "year": "2018",
+      "institution": "SCRUM Study"
+    },
+    {
+      "name": "Certified Tester Foundation Level (ISTQB)",
+      "status": "Concluído",
+      "year": "2015",
+      "institution": "ISTQB"
+    }
+  ],
+  "education": [
+    {
+      "degree": "MBA Executivo",
+      "field": "Lean Six Sigma Black Belt – Excelência Operacional",
+      "institution": "Business School Brasil (BSBr)",
+      "location": "Brasil",
+      "start_date": "2026-01",
+      "end_date": null,
+      "status": "Cursando",
+      "type": "MBA",
+      "level": "graduate"
+    },
+    {
+      "degree": "Pós-graduação",
+      "field": "Engenharia de Segurança do Trabalho",
+      "institution": "Faculdade Laboro",
+      "location": "Brasil",
+      "start_date": "2023-08",
+      "end_date": "2025-12",
+      "status": "Concluído",
+      "type": "Especialização",
+      "level": "graduate"
+    },
+    {
+      "degree": "Especialização",
+      "field": "Web Front-End Avançado",
+      "institution": "Udacity Nanodegree Program",
+      "location": "Online",
+      "start_date": "2018-01",
+      "end_date": "2018-06",
+      "status": "Concluído",
+      "type": "Nanodegree",
+      "level": "specialization"
+    },
+    {
+      "degree": "Bacharel",
+      "field": "Engenharia da Computação",
+      "institution": "Universidade Salvador (UNIFACS)",
+      "location": "Salvador, BA",
+      "start_date": "2013-01",
+      "end_date": "2023-06",
+      "status": "Concluído",
+      "type": "Graduação",
+      "level": "undergraduate"
+    },
+    {
+      "degree": "Técnico",
+      "field": "Manutenção de Celulares",
+      "institution": "ERBCELL",
+      "location": "Salvador, BA",
+      "start_date": "2012-08",
+      "end_date": "2012-12",
+      "duration": "40 horas (3 meses)",
+      "status": "Concluído",
+      "type": "Estágio Técnico",
+      "level": "technical"
+    },
+    {
+      "degree": "Ensino Médio",
+      "field": "Educação Básica",
+      "institution": "Colégio Integral",
+      "location": "Salvador, BA",
+      "start_date": "2009-01",
+      "end_date": "2011-12",
+      "status": "Concluído",
+      "type": "Ensino Médio",
+      "level": "secondary"
+    }
+  ],
+  "publications": [
+    {
+      "year": 2018,
+      "authors": [
+        "da Silva Filho, Heleno Cardoso",
+        "de Figueiredo Carneiro, Glauco",
+        "Costa, Ed Santana Martins",
+        "Monteiro, Miguel"
+      ],
+      "title": "Tools to Support SMEs to Migrate to the Cloud: Opportunities and Challenges",
+      "publication": "Advances in Intelligent Systems and Computing",
+      "publisher": "Springer International Publishing",
+      "edition": "1",
+      "location": "Las Vegas",
+      "volume": 738,
+      "pages": "159-165",
+      "type": "Conference Paper"
+    },
+    {
+      "year": 2017,
+      "authors": [
+        "A. do Nascimento, Carlos",
+        "Carneiro, Glauco",
+        "Santana M. Costa, Ed",
+        "Munson, Ethan"
+      ],
+      "title": "An Infrastructure to Support the Visual Analysis of Data from the Brazilian Public Health System",
+      "publication": "Journal of Software",
+      "volume": 12,
+      "pages": "612-630",
+      "doi": "10.17706/jsw.12.8.612-630",
+      "type": "Journal Article"
+    }
+  ],
+  "achievements": [
+    {
+      "year": 2019,
+      "title": "Hackathon Construtech",
+      "organization": "ABITAT",
+      "position": "1º Lugar",
+      "award": "Equipe vencedora",
+      "solution": "UPCycle",
+      "description": "Solução para transformar a forma de descarte de resíduos sólidos da construção civil, realizando a logística e o gerenciamento do descarte adequado e sustentável",
+      "type": "Hackathon",
+      "team_role": "Membro da equipe vencedora"
+    },
+    {
+      "year": 2017,
+      "title": "1° Hackathon do Congresso de TI",
+      "organization": "UNIFACS",
+      "position": "1º Lugar",
+      "award": "Equipe vencedora",
+      "solution": "Chat-Cae",
+      "description": "Chat-bot Caetano que realiza a triagem e convergência de informações dos setores relativos e provê relatórios para gestão sobre a Central de Atendimento ao Aluno",
+      "type": "Hackathon",
+      "team_role": "Planejamento e prototipagem"
+    },
+    {
+      "year": 2017,
+      "title": "1° Maratona de Desenvolvimento de Soluções Tecnológicas para Enfrentamento da Zika e Síndrome Congênita",
+      "organization": "Fundação Oswaldo Cruz",
+      "position": "3º Lugar",
+      "award": "Equipe 3º lugar",
+      "description": "Solução tecnológica para a integração dos sistemas de informação do SUS objetivando analisar e predizer indicadores da zika e síndrome congênita com foco social e administrativo",
+      "type": "Hackathon/Maratona",
+      "team_role": "Desenvolvimento da solução"
+    },
+    {
+      "year": 2015,
+      "title": "Fórum de Engenharia e Empreendedorismo",
+      "organization": "Liga Universitária de Empreendedorismo",
+      "position": "1º Lugar - Trilha Tecnológica",
+      "award": "Equipe vencedora",
+      "description": "Solução de negócio adequada aos objetivos da empresa start-up participante",
+      "type": "Competição",
+      "team_role": "Membro da equipe vencedora"
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "title": "Kaizen do Mês",
+      "organization": "Vale S.A. - Metais Básicos",
+      "award": "Kaizen do Mês",
+      "description": "Desenvolvimento do PowerApp para Gerenciamento de Mudanças",
+      "type": "Prêmio Interno",
+      "impact": "Reconhecimento por inovação e melhoria contínua"
+    }
+  ],
+  "professional_experience": [
+    {
+      "position": "Analista de Sistemas Senior",
+      "company": "Progen S.A.",
+      "location": "Belém - PA, Brasil",
+      "start_date": "2024-03",
+      "end_date": "2025-07",
+      "duration_months": 16,
+      "employment_type": "Full-time",
+      "current": false,
+      "projects": [
+        {
+          "name": "Valor Social Norte",
+          "client": "Vale S.A.",
+          "scope": "20+ obras em todo o estado do Pará"
+        },
+        {
+          "name": "Iniciativa ConnectData",
+          "client": "Vale S.A. - SSMA Corporativo"
+        }
+      ],
+      "responsibilities": [
+        "Gestão de Simulados",
+        "Gestão de Eventos",
+        "Gestão de Requisitos Legais",
+        "LAIA (Levantamento de Aspectos e Impactos Ambientais)",
+        "Segurança de Processos",
+        "Representante de Processo SAP - Íris",
+        "Ponto focal - Diário de Bordo e Sistemas",
+        "Apoio em Gestão de SSO",
+        "Definição e estruturação de modelos de dados",
+        "Análise e desenvolvimento de relatórios",
+        "Modelagem de processos",
+        "Adequação e otimização de processos SSMA",
+        "Realização de testes white-box e black-box (mobile)",
+        "Treinamento de equipes"
+      ],
+      "certifications_obtained": [
+        "Certificado de Brigadista (NR-23)",
+        "Certificado de Trabalho em Altura (NR-35)"
+      ],
+      "technical_activities": [
+        "Levantamento de requisitos técnicos e normativos",
+        "Utilização de PowerPlatform, SharePoint (HTML, JavaScript)",
+        "DataBricks (Python)",
+        "Azure Analysis Services",
+        "SAP BO e Hana",
+        "DevOps para gestão de projetos"
+      ],
+      "integrations": [
+        "SAP-IM (Gestão de incidentes)",
+        "SGC (Gestão de Contratadas)",
+        "Sitrack (Sistema de Telemetria)",
+        "Stratws (Gestão de negócio e indicadores)"
+      ],
+      "technologies": [
+        "PowerPlatform",
+        "SharePoint",
+        "HTML",
+        "JavaScript",
+        "Python",
+        "DataBricks",
+        "Azure Analysis Services",
+        "SAP BO",
+        "SAP Hana",
+        "Azure DevOps"
+      ],
+      "keywords": ["SSMA", "Segurança", "Meio Ambiente", "Data Engineering", "Business Intelligence", "Vale", "Mineração"]
+    },
+    {
+      "position": "Termo Fixo - Bolsista - Desenvolvedor",
+      "company": "UFBA - Universidade Federal da Bahia",
+      "department": "Departamento de Computação - PPGCOMP",
+      "location": "Salvador - BA, Brasil",
+      "start_date": "2023-08",
+      "end_date": "2024-03",
+      "duration_months": 8,
+      "employment_type": "Fixed-term Contract",
+      "current": false,
+      "projects": [
+        {
+          "name": "Projeto de Inovação CNPq - HCP",
+          "partners": ["UFBA", "Softex", "CNPq"],
+          "client": "Rede hospitalar de grande porte",
+          "type": "IoT - Sistema de monitoramento multimodal"
+        }
+      ],
+      "responsibilities": [
+        "Definição da arquitetura do sistema",
+        "Pesquisa de componentes (Microcontroladores, sensores, servidores)",
+        "Definição dos requisitos",
+        "Definição das fases do projeto",
+        "Modelagem de dados e sistemas",
+        "Pesquisa e desenvolvimento"
+      ],
+      "technical_activities": [
+        "Levantamento de requisitos técnicos e normativos",
+        "Análise de componentes",
+        "Desenvolvimento de solução IoT"
+      ],
+      "technologies": [
+        "Python",
+        "Rust",
+        "Shell Script",
+        "Kafka",
+        "SQL Server"
+      ],
+      "keywords": ["IoT", "Healthcare", "Research", "Innovation", "Data Engineering"]
+    },
+    {
+      "position": "Freelancer - P.J. - Instrutor",
+      "company": "INFINITY SCHOOL - Visual Art Creative Center",
+      "location": "Salvador - BA, Brasil",
+      "start_date": "2023-01",
+      "end_date": "2023-12",
+      "duration_months": 12,
+      "employment_type": "Freelance/PJ",
+      "current": false,
+      "description": "Lecionando em matérias relacionadas a programação",
+      "modules_taught": [
+        {
+          "name": "Back-end",
+          "technology": "Node.js"
+        },
+        {
+          "name": "Análise de Dados e Machine Learning",
+          "technology": "Python"
+        },
+        {
+          "name": "Desenvolvimento Web",
+          "technology": "HTML-CSS-Javascript"
+        }
+      ],
+      "technologies": [
+        "Node.js",
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Machine Learning"
+      ],
+      "keywords": ["Teaching", "Education", "Programming", "Data Science"]
+    },
+    {
+      "position": "Termo Fixo - P.J. - Consultor",
+      "company": "Logon Engenharia e Gerenciamento LTDA",
+      "location": "Belo Horizonte - MG, Brasil",
+      "start_date": "2022-08",
+      "end_date": "2022-10",
+      "duration_months": 3,
+      "employment_type": "Fixed-term Contract/PJ",
+      "current": false,
+      "projects": [
+        {
+          "name": "Safety in Design e Safety Review",
+          "client": "BAMIN - Porto Sul"
+        },
+        {
+          "name": "Adequação TI Corporativo",
+          "client": "Logon Engenharia"
+        },
+        {
+          "name": "Sistema de Gestão Integrado SESMT",
+          "type": "Análise de viabilidade"
+        }
+      ],
+      "responsibilities": [
+        "Automação de processos relacionados à metodologia Safety in Design",
+        "Automação de processos Safety Review",
+        "Avaliação e adequação do ambiente de TI corporativo",
+        "Melhoria de acessibilidade, disponibilidade, flexibilidade",
+        "Gestão de custos",
+        "Adequação à LGPD",
+        "Análise de viabilidade para Sistema de Gestão Integrado"
+      ],
+      "activities": [
+        "Utilização de Power BI e VBA",
+        "Gestão de Infraestrutura Microsoft",
+        "Gerenciamento e gestão de projetos",
+        "Desenvolvimento Web (HTML-CSS-Javascript)"
+      ],
+      "technologies": [
+        "Power BI",
+        "VBA",
+        "Microsoft Infrastructure",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "keywords": ["Safety", "Engineering", "Consulting", "LGPD", "Infrastructure"]
+    },
+    {
+      "position": "Analista Sênior - Sistemas e Gestão",
+      "company": "Triadd Consulting - Soluções em Segurança e Higiene Ocupacional",
+      "location": "Belo Horizonte - MG, Brasil",
+      "start_date": "2020-01",
+      "end_date": "2022-06",
+      "duration_months": 30,
+      "employment_type": "Full-time",
+      "current": false,
+      "clients": [
+        "Vale S.A.",
+        "EasySystem",
+        "Brasil BioFuels",
+        "Braskem"
+      ],
+      "key_projects": [
+        {
+          "name": "Comitê de Monitoramento COVID",
+          "client": "Vale S.A. - Corredor Norte",
+          "role": "Criação de modelo analítico de dados",
+          "deliverables": [
+            "Desenvolvimento de relatórios COVID",
+            "Monitoramento de indicadores para órgãos competentes"
+          ]
+        },
+        {
+          "name": "Gestão de Mudanças",
+          "client": "Vale S.A. - Metais Básicos",
+          "achievement": "Kaizen do Mês - Jul/2021",
+          "deliverable": "PowerApp para Gerenciamento de Mudanças"
+        },
+        {
+          "name": "Descaracterização de Barragens",
+          "client": "Vale S.A.",
+          "location": "Minas Gerais",
+          "role": "Implantação do sistema EasySystem em campo"
+        }
+      ],
+      "responsibilities": [
+        "Gestão da informação em vários contratos",
+        "Definição e estruturação de modelos de dados",
+        "Análise e desenvolvimento de relatórios",
+        "Modelagem e adequação de processos SSMA",
+        "Apoio em análise e dimensionamento de soluções em TI",
+        "Análise do sistema EasySystem",
+        "Apoio na equipe de gestão de contratos"
+      ],
+      "activities": [
+        "Utilização de Python, VBA, Azure Analysis Services",
+        "Forms, SharePoint, PowerApps, PowerAutomate, Power BI",
+        "Consumo de dados de sistemas corporativos",
+        "Parametrização e automações"
+      ],
+      "systems_integrated": [
+        "SAP-IM (Gestão de incidentes)",
+        "SGC (Gestão Contratadas)",
+        "VES (Gestão treinamentos)",
+        "GCM (Gestão de contingenciamento médico)",
+        "Stratws (Gestão de negócio e indicadores)"
+      ],
+      "methodologies": [
+        "Vale Production System (VPS)",
+        "Lean Six Sigma"
+      ],
+      "technologies": [
+        "Python",
+        "VBA",
+        "Azure Analysis Services",
+        "Microsoft Forms",
+        "SharePoint",
+        "PowerApps",
+        "PowerAutomate",
+        "Power BI",
+        "SAP-IM"
+      ],
+      "keywords": ["SSMA", "Data Management", "Consulting", "Vale", "COVID", "Kaizen", "PowerApps"]
+    },
+    {
+      "position": "Estágio - Sistemas e Gestão",
+      "company": "Vale Manganês",
+      "department": "Automação Industrial",
+      "location": "Simões Filho - BA, Brasil",
+      "start_date": "2019-05",
+      "end_date": "2019-09",
+      "duration_months": 5,
+      "employment_type": "Internship",
+      "current": false,
+      "responsibilities": [
+        "Desenvolvimento de análises de dados de sistemas de automação",
+        "Upgrade da infraestrutura de aplicações",
+        "Atualização e definição de padrões de dispositivos",
+        "Mapeamento e organização da Arquitetura de Rede Industrial",
+        "Acompanhamento de atualização de CLPs Siemens (S7-500 → S7-1500)"
+      ],
+      "kaizen_project": {
+        "name": "Aplicação para controle de notas através de QR Code",
+        "partners": ["Logística", "Intermarítima (Gerenciadora de Portos)"]
+      },
+      "infrastructure": [
+        "VMWare",
+        "Windows 7",
+        "Windows Server",
+        "IIS",
+        "SQL Server"
+      ],
+      "automation_stacks": [
+        "Allen Bradley - Rockwell",
+        "Siemens (S7-500, S7-1500)"
+      ],
+      "technologies": [
+        "VMWare",
+        "Windows Server",
+        "IIS",
+        "SQL Server",
+        "Siemens PLCs",
+        "Allen Bradley"
+      ],
+      "keywords": ["Industrial Automation", "Infrastructure", "PLCs", "Vale"]
+    },
+    {
+      "position": "Estágio - Sistemas e Gestão",
+      "company": "Vale Manganês",
+      "department": "SSMA (Saúde, Segurança e Meio Ambiente)",
+      "location": "Simões Filho - BA, Brasil",
+      "start_date": "2018-06",
+      "end_date": "2019-05",
+      "duration_months": 12,
+      "employment_type": "Internship",
+      "current": false,
+      "main_achievement": {
+        "description": "Ganho de aproximadamente 80% em performance na atividade de fechamento do mês",
+        "metric": "Tempo e pessoas envolvidas",
+        "tool": "Power BI"
+      },
+      "benchmark": {
+        "location": "São Luís - MA",
+        "department": "Segurança do Trabalho"
+      },
+      "responsibilities": [
+        "Integração, análise, modelagem e visualização de dados",
+        "Validação da informação para o setor SSMA",
+        "Desenvolvimento de relatórios e dashboards (Power BI)"
+      ],
+      "activities": [
+        "Análise crítica: cálculo de taxas de frequência, absenteísmo, indicadores proativos e reativos",
+        "Diário de Bordo: Mapeamento de equipes e valoração de indicadores de desempenho",
+        "Central de ações: Integração de sistema e controles paralelos",
+        "Utilização de Normas e Diretrizes para cálculo de KPI's",
+        "Disponibilização de dados através do SAP Hana",
+        "Definição de modelo de tabelas em planilhas de controle paralelo",
+        "Automação de processo administrativo para validação de requisitos",
+        "Geração de carteira de habilitação para funcionários"
+      ],
+      "technologies": [
+        "Power BI",
+        "SAP Hana",
+        "Excel",
+        "VBA"
+      ],
+      "keywords": ["SSMA", "Power BI", "Data Visualization", "KPIs", "Performance Improvement", "Vale"]
+    },
+    {
+      "position": "Termo Fixo - P.J. - Desenvolvedor de Software",
+      "company": "uRBAN (SKBO)",
+      "location": "Salvador - BA, Brasil",
+      "start_date": "2018-10",
+      "end_date": "2019-04",
+      "duration_months": 7,
+      "employment_type": "Fixed-term Contract/PJ",
+      "current": false,
+      "project": {
+        "name": "Aplicativo para Construção Civil",
+        "focus": "Arquitetura e Urbanismo"
+      },
+      "activities": [
+        "Desenvolvimento de painel para migração de dados",
+        "Desenvolvimento e manutenção de API de dados",
+        "Refatoração do Back-Office"
+      ],
+      "technologies": [
+        "Node.js",
+        "Express.js",
+        "React.js",
+        "MySQL",
+        "MongoDB"
+      ],
+      "keywords": ["Full Stack", "Construction Tech", "Architecture", "Mobile App"]
+    },
+    {
+      "position": "Estágio - Desenvolvimento de Software",
+      "company": "UNO - Consultoria em Tecnologia",
+      "location": "Salvador - BA, Brasil",
+      "start_date": "2018-01",
+      "end_date": "2018-03",
+      "duration_months": 3,
+      "employment_type": "Internship",
+      "current": false,
+      "responsibilities": [
+        "Programação utilizando Microsoft .NET e Core com SQL Server 2008",
+        "Desenvolvimento de web-services para área de eventos (NetPDV)",
+        "Lançamento do serviço de Recarga antecipada online",
+        "Customização do modelo e adição de funcionalidades sob demanda",
+        "Refatoração do site para melhor manutenibilidade, flexibilidade e escalabilidade"
+      ],
+      "technologies": [
+        "Microsoft .NET",
+        ".NET Core",
+        "SQL Server 2008",
+        "C#",
+        "ASP.NET"
+      ],
+      "keywords": ["Backend", ".NET", "Web Services", "Events Industry"]
+    },
+    {
+      "position": "Bolsista - IC (Iniciação Científica)",
+      "company": "FAPESB - UNIFACS / PPGCOMP",
+      "location": "Salvador - BA, Brasil",
+      "start_date": "2016-07",
+      "end_date": "2018-06",
+      "duration_months": 24,
+      "employment_type": "Research Grant",
+      "current": false,
+      "projects": [
+        {
+          "name": "Mineração Visual de Dados Públicos do Sistema Único de Saúde Brasileiro",
+          "technologies": ["Node.JS", "Apache CouchDB", "MySQL BI", "Docker"],
+          "deliverable": "Ferramenta de visualização"
+        },
+        {
+          "name": "Identificação e Seleção de Ferramentas de Apoio para Análise de Viabilidade de Migração de Sistemas Legados para Nuvem",
+          "type": "Revisão da literatura"
+        }
+      ],
+      "publications": 2,
+      "activities": [
+        "Descobrimento e Interpretação de arquiteturas de sistemas legados JAVA em UML via KDM",
+        "Métodos e Tipos de migração para nuvem",
+        "Ferramentas de Apoio à migração",
+        "Interpretação e desenvolvimento de softwares",
+        "Modelagem de dados e armazenamento NoSQL",
+        "Métodos de MapReduce através do CouchDB",
+        "Utilização da biblioteca D3.js para visualização da informação"
+      ],
+      "technologies": [
+        "Java",
+        "JavaScript",
+        "Docker",
+        "Shell scripts",
+        "Node.JS",
+        "Apache CouchDB",
+        "MySQL",
+        "D3.js",
+        "UML",
+        "KDM"
+      ],
+      "keywords": ["Research", "Healthcare Data", "Data Visualization", "Cloud Migration", "NoSQL", "Scientific Publications"]
+    },
+    {
+      "position": "Estágio - Quality Assurance",
+      "company": "BRISA – Sociedade para o Desenvolvimento das Tecnologias da Informação",
+      "location": "Salvador - BA, Brasil",
+      "start_date": "2014-06",
+      "end_date": "2016-04",
+      "duration_months": 23,
+      "employment_type": "Internship",
+      "current": false,
+      "client": "Multinacional de grande porte",
+      "certification_obtained": {
+        "name": "ISTQB Certified Tester - Foundation Level",
+        "year": 2015
+      },
+      "responsibilities": [
+        "Preparação de amostra e execução de checklists funcionais e não funcionais",
+        "Utilização de técnicas de caixa-preta",
+        "Identificação de falhas",
+        "Testes de regressão",
+        "Verificação e validação de requisitos de celulares, tablets e acessórios",
+        "QA da ferramenta interna",
+        "Criação e execução de casos de teste",
+        "Análise de cobertura dos requisitos"
+      ],
+      "tools": [
+        "HP ALM Center",
+        "Mantis",
+        "Redmine"
+      ],
+      "technologies": [
+        "HP ALM",
+        "Mantis",
+        "Redmine",
+        "Black Box Testing"
+      ],
+      "keywords": ["Quality Assurance", "Software Testing", "ISTQB", "Mobile Testing", "Test Automation"]
+    }
+  ],
+  "additional_qualifications": [
+    {
+      "date": "2025-10",
+      "category": "Banco de Dados",
+      "name": "Preparatório certificação MS DP-300",
+      "status": "Em Andamento",
+      "institution": "SQL Server Expert Ensino Digital LTDA"
+    },
+    {
+      "date": "2025-09",
+      "category": "Finanças",
+      "name": "Pré-MBA Finanças Corporativas",
+      "institution": "Exame Educação e Saint Paul"
+    },
+    {
+      "date": "2024-09",
+      "category": "ERP",
+      "name": "SAP BTP - Clean Core na Prática",
+      "institution": "Lab2Learn"
+    },
+    {
+      "date": "2024-02",
+      "category": "Ciência de Dados",
+      "name": "Séries temporais com Python",
+      "institution": "UFBA - PPGCOMP"
+    },
+    {
+      "date": "2023-12",
+      "category": "Gestão de Processos",
+      "name": "Fundamentos da Excelência Operacional",
+      "institution": "FM2S Educação e Consultoria"
+    },
+    {
+      "date": "2023-12",
+      "category": "Qualidade",
+      "name": "Curso Auditor Interno ISO 9001:2015",
+      "institution": "FM2S Educação e Consultoria"
+    },
+    {
+      "date": "2023-07",
+      "category": "Telecomunicações",
+      "name": "Capacitação em redes 5g - Huawei",
+      "institution": "UFBA - PPGCOMP"
+    },
+    {
+      "date": "2022-12",
+      "category": "Gestão de Projeto",
+      "name": "Six-sigma Yellow belt",
+      "institution": "FM2S Educação e Consultoria"
+    },
+    {
+      "date": "2021-11",
+      "category": "Gestão de Processos",
+      "name": "Business Process Model and Notation",
+      "institution": "DNC GROUP"
+    },
+    {
+      "date": "2018-10",
+      "category": "Gestão de Projeto",
+      "name": "Metodologia de Gestão de Projeto de Tecnologia da Vale",
+      "institution": "Valer - Educação Vale"
+    },
+    {
+      "date": "2018-09",
+      "category": "Gestão de Projeto",
+      "name": "Six-sigma White belt",
+      "institution": "CREA BA"
+    },
+    {
+      "date": "2018-09",
+      "category": "Gestão de Projeto",
+      "name": "Gerenciamento de Projetos de TI com HP PPM",
+      "institution": "Valer - Educação Vale"
+    },
+    {
+      "date": "2018-08",
+      "category": "Gestão de Projeto",
+      "name": "Aplicações de industrial IT",
+      "institution": "Valer - Educação Vale"
+    },
+    {
+      "date": "2018-08",
+      "category": "Governança",
+      "name": "Segurança da informação - Boas práticas",
+      "institution": "Valer - Educação Vale"
+    },
+    {
+      "date": "2018-08",
+      "category": "Governança",
+      "name": "Código de ética e conduta na Vale",
+      "institution": "Valer - Educação Vale"
+    },
+    {
+      "date": "2018-08",
+      "category": "SSMA",
+      "name": "Visão geral em gestão integrada de saúde, segurança e meio ambiente",
+      "institution": "Valer - Educação Vale"
+    },
+    {
+      "date": "2018-06",
+      "category": "ERP",
+      "name": "SAP IM - Gestor de ocorrências e Não Conformidades",
+      "institution": "Valer - Educação Vale"
+    },
+    {
+      "date": "2018-05",
+      "category": "ERP",
+      "name": "SAP R/3 - PP, MM, SD, FI/CO, PM e QM",
+      "institution": "MDL Consulting"
+    },
+    {
+      "date": "2018-01",
+      "category": "Padrão de Projeto",
+      "name": "Fundamentos do C# com Clean Code",
+      "institution": "Microsoft Virtual Academy"
+    },
+    {
+      "date": "2018-01",
+      "category": "Padrão de Projeto",
+      "name": "ASP.NET MVC - Básico e Intermediário",
+      "institution": "Microsoft Virtual Academy"
+    },
+    {
+      "date": "2018-01",
+      "category": "Linguagens Web",
+      "name": "Developing in HTML5 with JavaScript and CSS3 Jump Start",
+      "institution": "Microsoft Virtual Academy"
+    },
+    {
+      "date": "2018-04",
+      "category": "Gestão de Projeto",
+      "name": "Scrum Fundamentals Certified",
+      "institution": "SCRUMstudy"
+    },
+    {
+      "date": "2017-06",
+      "category": "Matéria em inglês",
+      "name": "Artificial Intelligence Applied to Business",
+      "institution": "International Office - UNIFACS"
+    },
+    {
+      "date": "2017-01",
+      "category": "Idiomas",
+      "name": "Laureate English for Academic Purpose",
+      "level": "B2 (CEFR)",
+      "institution": "International Office - UNIFACS"
+    },
+    {
+      "date": "2014-05",
+      "category": "Intercâmbio",
+      "name": "Fort Lauderdale, Florida, US",
+      "level": "Upper Intermediate (B2)",
+      "duration": "20 semanas",
+      "institution": "LAL Language School"
+    }
+  ],
+  "summary": {
+    "total_years_experience": 11,
+    "industries": [
+      "Mining & Metals",
+      "Safety & Occupational Health",
+      "Healthcare",
+      "Construction Tech",
+      "Education",
+      "IT Consulting"
+    ],
+    "key_clients": [
+      "Vale S.A.",
+      "Braskem",
+      "BAMIN",
+      "Brasil BioFuels"
+    ],
+    "areas_of_expertise": [
+      "Data Engineering",
+      "Business Intelligence",
+      "Data Analytics",
+      "Process Automation",
+      "SSMA (Health, Safety & Environment)",
+      "Industrial Automation",
+      "Software Development",
+      "Quality Assurance"
+    ],
+    "notable_achievements": [
+      "Kaizen do Mês - Vale (Jul/2021)",
+      "80% performance improvement - Power BI implementation",
+      "4 Hackathon awards (2015-2019)",
+      "2 Scientific publications",
+      "ISTQB Certified Tester"
+    ]
+  }
+}
