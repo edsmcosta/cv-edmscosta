@@ -42,7 +42,7 @@
     "image": "",
     "email": "ed.costa@emcdl.com.br",
     "phone": "+55 (71) 9 9956-5197",
-    "url": "https://edsmcosta.com",
+    "url": "https://emcdl.com.br",
     "summary": "Profissional apaixonado por dados, tecnologia, engenharia e melhoria contínua, com 11+ anos de experiência. Especialista em Business Intelligence, Engenharia de Dados e SSMA. Formado em Engenharia da Computação, trabalho integrando processos e áreas por meio de soluções tecnológicas que aumentam a confiabilidade, reduzem riscos e otimizam resultados. Experiência em extração, modelagem, análise e visualização de dados com proficiência em Python, JavaScript, SQL, Power BI, Azure Services e Databricks.",
     "location": {
       "address": "Graça",
@@ -94,7 +94,7 @@
       "url": "https://ufba.br",
       "startDate": "2023-08-01",
       "endDate": "2024-03-31",
-      "summary": "Projeto de Inovação CNPq em parceria UFBA/Softex/CNPq para rede hospitalar. Desenvolvimento de solução IoT para sistema de monitoramento multimodal em saúde.",
+      "summary": "Projeto de Inovação CNPq em parceria UFBA/Softex/CNPq para rede hospitalar. Desenvolvimento de solução IoT para sistema de monitoramento multimodal em saúde, com foco em redução de quedas de leitos.",
       "highlights": [
         "Definição da arquitetura do sistema IoT",
         "Pesquisa de componentes (microcontroladores, sensores, servidores)",
