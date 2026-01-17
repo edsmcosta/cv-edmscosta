@@ -156,8 +156,54 @@ keywords/
 ```
 cv-edmscosta/
 ├── cv_ed_costa.json    # CV completo em JSON Resume + ATS
+├── schema.json         # JSON Schema para validação
 └── readme.md           # Este documento
 ```
+
+---
+
+## 🔍 VALIDAÇÃO COM JSON SCHEMA
+
+O arquivo `schema.json` permite validação automática do CV, garantindo integridade dos dados.
+
+### **Cobertura do Schema**
+
+| Seção | Campos Obrigatórios | Validações |
+|-------|---------------------|------------|
+| `meta` | version, lastModified, language | Formato semver, ISO 8601, locale |
+| `basics` | name, email | Email válido, país ISO 3166-1 |
+| `work` | name, position, startDate | Datas ISO 8601 |
+| `education` | institution, area, studyType | Datas ISO 8601 |
+| `skills` | name | Níveis: Beginner/Intermediate/Advanced/Expert |
+| `languages` | language, fluency | Níveis CEFR (A1-C2) |
+| `awards` | title, awarder | - |
+| `publications` | name, publisher | - |
+| `certificates` | name, issuer | - |
+
+### **Como Validar**
+
+**Usando ajv-cli (Node.js):**
+```bash
+npm install -g ajv-cli
+ajv validate -s schema.json -d cv_ed_costa.json
+```
+
+**Usando Python (jsonschema):**
+```bash
+pip install jsonschema
+python -c "
+import json
+from jsonschema import validate
+schema = json.load(open('schema.json'))
+data = json.load(open('cv_ed_costa.json'))
+validate(data, schema)
+print('Validação OK!')
+"
+```
+
+**Online:**
+- https://www.jsonschemavalidator.net/
+- https://json-schema-validator.herokuapp.com/
 
 ---
 

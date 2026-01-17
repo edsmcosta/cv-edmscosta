@@ -1,0 +1,409 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://edsmcosta.com/schemas/resume-v2.json",
+  "title": "JSON Resume + ATS Extensions",
+  "description": "Schema de validação para CV estruturado seguindo padrão JSON Resume com extensões ATS",
+  "type": "object",
+  "required": ["meta", "basics", "work", "education", "skills"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "$id": {
+      "type": "string",
+      "format": "uri"
+    },
+    "meta": {
+      "type": "object",
+      "required": ["version", "lastModified", "language"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "canonical": {
+          "type": "string",
+          "format": "uri"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "language": {
+          "type": "string",
+          "pattern": "^[a-z]{2}-[A-Z]{2}$"
+        },
+        "theme": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "generator": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" },
+            "sourceFormat": { "type": "string" }
+          }
+        },
+        "ats": {
+          "type": "object",
+          "properties": {
+            "optimized": { "type": "boolean" },
+            "parseable": { "type": "boolean" },
+            "keywordsExtracted": { "type": "boolean" },
+            "score": {
+              "type": "object",
+              "properties": {
+                "overall": { "type": "integer", "minimum": 0, "maximum": 100 },
+                "technical": { "type": "integer", "minimum": 0, "maximum": 100 },
+                "experience": { "type": "integer", "minimum": 0, "maximum": 100 },
+                "education": { "type": "integer", "minimum": 0, "maximum": 100 },
+                "keywords": { "type": "integer", "minimum": 0, "maximum": 100 },
+                "format": { "type": "integer", "minimum": 0, "maximum": 100 }
+              }
+            },
+            "compatibility": {
+              "type": "object",
+              "additionalProperties": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "basics": {
+      "type": "object",
+      "required": ["name", "email"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "address": { "type": "string" },
+            "postalCode": { "type": "string" },
+            "city": { "type": "string" },
+            "countryCode": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            },
+            "region": { "type": "string" }
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["network", "url"],
+            "properties": {
+              "network": { "type": "string" },
+              "username": { "type": "string" },
+              "url": { "type": "string", "format": "uri" }
+            }
+          }
+        }
+      }
+    },
+    "work": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "position", "startDate"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "position": { "type": "string" },
+          "location": { "type": "string" },
+          "url": { "type": "string" },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": ["string", "null"],
+            "format": "date"
+          },
+          "summary": { "type": "string" },
+          "highlights": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "keywords": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["institution", "area", "studyType"],
+        "properties": {
+          "id": { "type": "string" },
+          "institution": { "type": "string" },
+          "url": { "type": "string" },
+          "area": { "type": "string" },
+          "studyType": { "type": "string" },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": ["string", "null"],
+            "format": "date"
+          },
+          "score": { "type": "string" },
+          "courses": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "level": {
+            "type": "string",
+            "enum": ["Beginner", "Intermediate", "Advanced", "Expert"]
+          },
+          "keywords": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["language", "fluency"],
+        "properties": {
+          "language": { "type": "string" },
+          "fluency": { "type": "string" },
+          "level": {
+            "type": "string",
+            "pattern": "^[A-C][1-2]$"
+          },
+          "certifications": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "awards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "awarder"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "awarder": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "publications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "publisher"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "publisher": { "type": "string" },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "url": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "certificates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "issuer"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "issuer": { "type": "string" },
+          "url": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    "x-atsData": {
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "type": "object",
+          "properties": {
+            "primary": { "type": "array", "items": { "type": "string" } },
+            "technical": { "type": "array", "items": { "type": "string" } },
+            "soft": { "type": "array", "items": { "type": "string" } },
+            "methodologies": { "type": "array", "items": { "type": "string" } },
+            "industries": { "type": "array", "items": { "type": "string" } },
+            "certifications": { "type": "array", "items": { "type": "string" } },
+            "companies": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "quantifiedAchievements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "metric": { "type": "string" },
+              "context": { "type": "string" },
+              "verified": { "type": "boolean" }
+            }
+          }
+        },
+        "yearsOfExperience": {
+          "type": "object",
+          "properties": {
+            "total": { "type": "integer", "minimum": 0 },
+            "byRole": {
+              "type": "object",
+              "additionalProperties": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "x-custom": {
+      "type": "object",
+      "properties": {
+        "objectives": {
+          "type": "object",
+          "properties": {
+            "personal": {
+              "type": "object",
+              "properties": {
+                "summary": { "type": "string" },
+                "goal": { "type": "string" }
+              }
+            },
+            "professional": {
+              "type": "object",
+              "properties": {
+                "summary": { "type": "string" },
+                "currentFocus": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "timeline": {
+          "type": "object",
+          "properties": {
+            "careerStart": { "type": "string", "format": "date" },
+            "totalYears": { "type": "integer", "minimum": 0 },
+            "currentStatus": { "type": "string" },
+            "milestones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "date": { "type": "string", "format": "date" },
+                  "event": { "type": "string" },
+                  "significance": {
+                    "type": "string",
+                    "enum": ["low", "medium", "high"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "x-integrations": {
+      "type": "object",
+      "properties": {
+        "linkedin": {
+          "type": "object",
+          "properties": {
+            "profileUrl": { "type": "string", "format": "uri" },
+            "vanityName": { "type": "string" },
+            "publicIdentifier": { "type": "string" }
+          }
+        },
+        "github": {
+          "type": "object",
+          "properties": {
+            "profileUrl": { "type": "string", "format": "uri" },
+            "username": { "type": "string" }
+          }
+        },
+        "workday": {
+          "type": "object",
+          "properties": {
+            "candidateId": { "type": "string" },
+            "applicationDate": { "type": "string", "format": "date" },
+            "source": { "type": "string" },
+            "tags": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "indeed": {
+          "type": "object",
+          "properties": {
+            "resumeId": { "type": "string" },
+            "visibility": { "type": "string" },
+            "categories": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    }
+  }
+}
