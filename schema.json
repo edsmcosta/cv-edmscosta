@@ -38,6 +38,14 @@
           "type": "string",
           "pattern": "^[a-z]{2}-[A-Z]{2}$"
         },
+        "locales": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]{2}-[A-Z]{2}$"
+          },
+          "description": "Available locales for this resume"
+        },
         "theme": {
           "type": "string"
         },
@@ -401,6 +409,108 @@
             "resumeId": { "type": "string" },
             "visibility": { "type": "string" },
             "categories": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "x-i18n": {
+      "type": "object",
+      "description": "Internationalization - translations for different locales",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Locale-specific translations (e.g., en-US)",
+        "properties": {
+          "basics": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "summary": { "type": "string" }
+            }
+          },
+          "work": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "position": { "type": "string" },
+                "summary": { "type": "string" },
+                "highlights": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          },
+          "education": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "area": { "type": "string" },
+                "studyType": { "type": "string" }
+              }
+            }
+          },
+          "awards": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string" },
+                "summary": { "type": "string" }
+              }
+            }
+          },
+          "certificates": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" }
+              }
+            }
+          },
+          "x-custom": {
+            "type": "object",
+            "properties": {
+              "objectives": {
+                "type": "object",
+                "properties": {
+                  "personal": {
+                    "type": "object",
+                    "properties": {
+                      "summary": { "type": "string" },
+                      "goal": { "type": "string" }
+                    }
+                  },
+                  "professional": {
+                    "type": "object",
+                    "properties": {
+                      "summary": { "type": "string" },
+                      "currentFocus": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              },
+              "timeline": {
+                "type": "object",
+                "properties": {
+                  "currentStatus": { "type": "string" },
+                  "milestones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "event": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
