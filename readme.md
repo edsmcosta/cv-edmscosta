@@ -5,7 +5,7 @@
 
 ## 📋 STATUS DA IMPLEMENTAÇÃO
 
-### **Versão Atual: 2.0.0**
+### **Versão Atual: 2.1.0**
 **Última atualização:** 2026-01-17
 
 ### **Features Implementadas:**
@@ -19,6 +19,7 @@
 ✅ Score ATS calculado (95/100)
 ✅ Compatibilidade com múltiplos ATS
 ✅ Keywords estruturadas por categoria
+✅ Suporte multilíngue (pt-BR / en-US)
 
 ---
 
@@ -63,6 +64,7 @@
 | `x-custom.objectives` | Objetivos pessoais e profissionais | ✅ |
 | `x-custom.timeline` | Timeline de carreira com milestones | ✅ |
 | `x-integrations` | Integrações LinkedIn e GitHub | ✅ |
+| `x-i18n` | Traduções multilíngue (en-US) | ✅ |
 
 ---
 
@@ -140,8 +142,8 @@ keywords/
 
 ### **Fase 5: i18n e Localização**
 - [x] Definir idioma principal (pt-BR)
-- [ ] Implementar suporte multilíngue pt-BR/en-US
-- [ ] Traduzir campos principais
+- [x] Implementar suporte multilíngue pt-BR/en-US (`x-i18n`)
+- [x] Traduzir campos principais (basics, work, education, awards, certificates, objectives)
 
 ### **Fase 6: Validação e Testes**
 - [x] Implementar JSON Schema reference
@@ -207,26 +209,42 @@ print('Validação OK!')
 
 ---
 
-## 🔧 RECOMENDAÇÕES PARA FEATURES PENDENTES
+## 🌍 SUPORTE MULTILÍNGUE (i18n)
 
-### **i18n - Suporte Multilíngue**
+O CV possui suporte a múltiplos idiomas através da seção `x-i18n`.
 
-Implementar suporte a múltiplos idiomas usando estrutura de objetos:
+### **Idiomas Disponíveis**
+- **pt-BR** (padrão) - Campos principais do documento
+- **en-US** - Traduções na seção `x-i18n.en-US`
 
-```json
-{
-  "basics": {
-    "label": {
-      "pt-BR": "Engenheiro da Computação | Analista de Dados",
-      "en-US": "Computer Engineer | Data Analyst"
-    },
-    "summary": {
-      "pt-BR": "Profissional apaixonado por dados...",
-      "en-US": "Data-driven professional..."
-    }
-  }
-}
+### **Campos Traduzidos**
+
+| Seção | Campos |
+|-------|--------|
+| `basics` | label, summary |
+| `work` | position, summary, highlights (todas as 11 experiências) |
+| `education` | area, studyType |
+| `awards` | title, summary |
+| `certificates` | name (quando aplicável) |
+| `x-custom` | objectives, timeline.milestones |
+
+### **Como Usar**
+
+Para acessar a versão em inglês de um campo:
+
+```javascript
+// Exemplo: obter o cargo traduzido
+const workId = "work-001";
+const position_ptBR = cv.work.find(w => w.id === workId).position;
+const position_enUS = cv["x-i18n"]["en-US"].work[workId].position;
+
+// position_ptBR: "Analista de Sistemas Senior"
+// position_enUS: "Senior Systems Analyst"
 ```
+
+---
+
+## 🔧 RECOMENDAÇÕES PARA FEATURES PENDENTES
 
 ### **Mapeamento Workday/Indeed**
 
