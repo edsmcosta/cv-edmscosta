@@ -2,11 +2,12 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "$id": "https://edsmcosta.com/resume/v2.json",
   "meta": {
-    "version": "2.0.0",
+    "version": "2.1.0",
     "canonical": "https://edsmcosta.com/resume",
-    "lastModified": "2026-01-17T03:00:00Z",
+    "lastModified": "2026-01-17T04:00:00Z",
     "created": "2020-07-05T00:00:00Z",
     "language": "pt-BR",
+    "locales": ["pt-BR", "en-US"],
     "theme": "professional",
     "format": "JSON Resume v1.0.0 + ATS Extensions",
     "generator": {
@@ -744,6 +745,220 @@
     "github": {
       "profileUrl": "https://github.com/edsmcosta",
       "username": "edsmcosta"
+    }
+  },
+  "x-i18n": {
+    "en-US": {
+      "basics": {
+        "label": "Computer Engineer | Data Analyst & Engineer",
+        "summary": "Data-driven professional with 11+ years of experience in technology, engineering, and continuous improvement. Specialist in Business Intelligence, Data Engineering, and EHS (Environment, Health & Safety). Computer Engineering graduate, I work integrating processes and areas through technological solutions that increase reliability, reduce risks, and optimize results. Experience in data extraction, modeling, analysis, and visualization with proficiency in Python, JavaScript, SQL, Power BI, Azure Services, and Databricks."
+      },
+      "work": {
+        "work-001": {
+          "position": "Senior Systems Analyst",
+          "summary": "Working on strategic projects for Vale S.A.: Valor Social Norte (20+ construction sites) and ConnectData Initiative (Corporate EHS). Responsible for data model definition, report development, EHS process optimization, and corporate systems integration.",
+          "highlights": [
+            "Certifications: NR-23 (Fire Brigade) and NR-35 (Working at Heights)",
+            "Systems integration: SAP-IM, SGC, Sitrack, Stratws",
+            "Stack: PowerPlatform, DataBricks (Python), Azure Analysis Services, SAP BO/Hana",
+            "White-box and black-box testing on mobile applications",
+            "Operational team training"
+          ]
+        },
+        "work-002": {
+          "position": "Developer - Fellow (Fixed Term)",
+          "summary": "CNPq Innovation Project in partnership with UFBA/Softex/CNPq for hospital network. Development of IoT solution for multimodal health monitoring system, focused on reducing bed falls.",
+          "highlights": [
+            "IoT system architecture definition",
+            "Component research (microcontrollers, sensors, servers)",
+            "Data and systems modeling",
+            "Stack: Python, Rust, Shell Script, Kafka, SQL Server"
+          ]
+        },
+        "work-003": {
+          "position": "Instructor (Freelancer)",
+          "summary": "Programming instructor in three main modules: Back-end (Node.js), Data Analysis and Machine Learning (Python), and Web Development (HTML/CSS/JavaScript).",
+          "highlights": [
+            "Training junior and mid-level developers",
+            "Curriculum design for intensive bootcamps",
+            "Practical projects in Data Science and Full Stack"
+          ]
+        },
+        "work-004": {
+          "position": "Consultant (Fixed Term)",
+          "summary": "Consulting on Safety in Design and Safety Review process automation (BAMIN - Porto Sul). Corporate IT environment adequacy with focus on LGPD (Brazilian Data Protection Law) and cost management.",
+          "highlights": [
+            "Safety process automation with Power BI and VBA",
+            "Feasibility analysis for SESMT Integrated Management System",
+            "Microsoft infrastructure management"
+          ]
+        },
+        "work-005": {
+          "position": "Senior Analyst - Systems and Management",
+          "summary": "Information management across multiple contracts (Vale S.A., Braskem, Brasil BioFuels). EHS specialist focused on data modeling and PowerPlatform solutions development.",
+          "highlights": [
+            "Kaizen of the Month (Jul/2021) - PowerApp for Change Management (Vale Base Metals)",
+            "Vale COVID Committee - North Corridor: Analytical model and strategic dashboards",
+            "Accelerate critical processes by 30% with PowerApps/PowerAutomate",
+            "EasySystem implementation (Dam Decharacterization - MG)",
+            "VPS Methodology (Vale Production System) - Lean Six Sigma"
+          ]
+        },
+        "work-006": {
+          "position": "Intern - Systems and Management (Industrial Automation)",
+          "summary": "Industrial Automation sector: data analysis, infrastructure upgrade, and Siemens PLC modernization.",
+          "highlights": [
+            "Infrastructure upgrade: VMWare, Windows Server, IIS, SQL Server",
+            "Siemens PLC update: S7-500 → S7-1500",
+            "Kaizen: QR Code application for note control (partnership with Intermarítima)",
+            "Stack: Allen Bradley - Rockwell, Siemens"
+          ]
+        },
+        "work-007": {
+          "position": "Intern - Systems and Management (EHS)",
+          "summary": "EHS Sector: Data integration, analysis, modeling, and visualization. Power BI dashboard development.",
+          "highlights": [
+            "80% performance gain in monthly closing (measured in time and people)",
+            "Benchmark: Occupational Safety - Vale São Luís (MA)",
+            "Power BI dashboards for EHS KPIs",
+            "Automation: Requirements validation and driver's license generation",
+            "Stack: Power BI, SAP Hana, Excel/VBA"
+          ]
+        },
+        "work-008": {
+          "position": "Software Developer (Freelancer)",
+          "summary": "Mobile application development for Construction Industry (Architecture and Urban Planning).",
+          "highlights": [
+            "Legacy data migration panel",
+            "RESTful APIs for mobile app",
+            "Complete Back-Office refactoring",
+            "Stack: Node.js, Express.js, React.js, MySQL, MongoDB"
+          ]
+        },
+        "work-009": {
+          "position": "Intern - Software Development",
+          "summary": ".NET/Core development for events area (NetPDV).",
+          "highlights": [
+            "Web services for event management",
+            "Online Recharge service launch",
+            "Corporate website refactoring",
+            "Stack: .NET Core, SQL Server 2008, C#"
+          ]
+        },
+        "work-010": {
+          "position": "Fellow - Scientific Initiation",
+          "summary": "Research in Visual Data Mining (SUS - Brazilian Health System) and Legacy Systems Migration to Cloud.",
+          "highlights": [
+            "2 Scientific Publications (1 Journal + 1 Conference)",
+            "Visualization tool: Node.JS, CouchDB, MySQL BI, Docker",
+            "Systematic review: Cloud Migration",
+            "Stack: Java, JavaScript, D3.js, Docker, NoSQL"
+          ]
+        },
+        "work-011": {
+          "position": "Intern - Quality Assurance",
+          "summary": "QA for multinational company: functional and non-functional testing on mobile devices.",
+          "highlights": [
+            "ISTQB Certified Tester - Foundation Level (2015)",
+            "Black-box testing on phones, tablets, and accessories",
+            "Tools: HP ALM Center, Mantis, Redmine",
+            "Requirements coverage analysis"
+          ]
+        }
+      },
+      "education": {
+        "edu-001": {
+          "area": "Lean Six Sigma Black Belt – Operational Excellence",
+          "studyType": "Executive MBA"
+        },
+        "edu-002": {
+          "area": "Occupational Safety Engineering",
+          "studyType": "Postgraduate (MBA)"
+        },
+        "edu-003": {
+          "area": "Advanced Web Front-End",
+          "studyType": "Specialization"
+        },
+        "edu-004": {
+          "area": "Computer Engineering",
+          "studyType": "Bachelor's Degree"
+        }
+      },
+      "awards": {
+        "award-001": {
+          "title": "Kaizen of the Month",
+          "summary": "Award for developing PowerApp for Change Management, improving EHS process efficiency by 30%."
+        },
+        "award-002": {
+          "title": "Construtech Hackathon - 1st Place",
+          "summary": "Winning team with UPCycle solution for transforming construction solid waste disposal."
+        },
+        "award-003": {
+          "title": "1st IT Congress Hackathon - 1st Place",
+          "summary": "Chat-Cae solution: chatbot for triage and information convergence from Student Service Center."
+        },
+        "award-004": {
+          "title": "Zika Marathon - 3rd Place",
+          "summary": "Technological solution for SUS systems integration aimed at predictive analysis of zika and congenital syndrome."
+        },
+        "award-005": {
+          "title": "Engineering and Entrepreneurship Forum - 1st Place",
+          "summary": "Winner of the technology track with business solution for participating start-up."
+        }
+      },
+      "certificates": {
+        "cert-002": {
+          "name": "Corporate Finance (Pre-MBA)"
+        },
+        "cert-004": {
+          "name": "Six Sigma Yellow Belt"
+        },
+        "cert-005": {
+          "name": "Business Process Model and Notation (BPMN)"
+        },
+        "cert-006": {
+          "name": "Scrum Fundamentals Certified"
+        },
+        "cert-007": {
+          "name": "ISTQB Certified Tester - Foundation Level"
+        },
+        "cert-008": {
+          "name": "Fire Brigade (NR-23)"
+        },
+        "cert-009": {
+          "name": "Working at Heights (NR-35)"
+        }
+      },
+      "x-custom": {
+        "objectives": {
+          "personal": {
+            "summary": "Curious by nature, passionate about learning, traveling, and exploring new cultures. Seeking experiences that combine adrenaline, learning, and personal growth.",
+            "goal": "Combine technology, data, and strategy to drive smarter, more sustainable, and human-centered businesses."
+          },
+          "professional": {
+            "summary": "Transform information into intelligent decisions and generate real impact on companies and people.",
+            "currentFocus": [
+              "Executive MBA in Lean Six Sigma Black Belt (BSBr)",
+              "Microsoft DP-300 Certification (SQL Server Expert)",
+              "Specialization in Azure Data Services"
+            ]
+          }
+        },
+        "timeline": {
+          "currentStatus": "Professional Development Period",
+          "milestones": [
+            {
+              "event": "Computer Engineering Graduation"
+            },
+            {
+              "event": "Kaizen of the Month - Vale"
+            },
+            {
+              "event": "ISTQB Certification"
+            }
+          ]
+        }
+      }
     }
   }
 }
