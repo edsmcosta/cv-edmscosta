@@ -2,9 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "$id": "https://edsmcosta.com/resume/v2.json",
   "meta": {
-    "version": "2.1.0",
+    "version": "2.2.0",
     "canonical": "https://edsmcosta.com/resume",
-    "lastModified": "2026-01-22T12:00:00Z",
+    "lastModified": "2026-01-22T20:00:00Z",
     "created": "2020-07-05T00:00:00Z",
     "language": "pt-BR",
     "locales": ["pt-BR", "en-US"],
@@ -587,8 +587,23 @@
   "certificates": [
     {
       "id": "cert-001",
-      "name": "Microsoft DP-300: SQL Server Expert",
-      "date": "2025-10-01",
+      "name": "Formação AI-102 Certification",
+      "date": "2026-01-22",
+      "issuer": "DIO",
+      "url": "https://www.dio.me/certificate/BQAFMFRC/share"
+    },
+    {
+      "id": "cert-001b",
+      "name": "Microsoft PL-300: Power BI Data Analyst",
+      "date": "2026-02-01",
+      "issuer": "Microsoft",
+      "url": "",
+      "status": "In Progress"
+    },
+    {
+      "id": "cert-001c",
+      "name": "Microsoft AI-102: Azure AI Engineer",
+      "date": "2026-03-01",
       "issuer": "Microsoft",
       "url": "",
       "status": "In Progress"
@@ -605,7 +620,7 @@
       "name": "SAP BTP - Clean Core na Prática",
       "date": "2024-09-01",
       "issuer": "Lab2Learn",
-      "url": ""
+      "url": "https://verify.netcredential.com/kcQChrXMAe"
     },
     {
       "id": "cert-004",
@@ -729,8 +744,8 @@
         "summary": "Transformar informações em decisões inteligentes e gerar impacto real nas empresas e nas pessoas.",
         "currentFocus": [
           "MBA Executivo em Lean Six Sigma Black Belt (BSBr)",
-          "Certificação Microsoft DP-300 (SQL Server Expert)",
-          "Especialização em Azure Data Services"
+          "Certificação Microsoft PL-300 (Power BI Data Analyst)",
+          "Certificação Microsoft AI-102 (Azure AI Engineer)"
         ]
       }
     },
@@ -971,8 +986,8 @@
             "summary": "Transform information into intelligent decisions and generate real impact on companies and people.",
             "currentFocus": [
               "Executive MBA in Lean Six Sigma Black Belt (BSBr)",
-              "Microsoft DP-300 Certification (SQL Server Expert)",
-              "Specialization in Azure Data Services"
+              "Microsoft PL-300 Certification (Power BI Data Analyst)",
+              "Microsoft AI-102 Certification (Azure AI Engineer)"
             ]
           }
         },
