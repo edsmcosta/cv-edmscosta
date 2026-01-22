@@ -13,9 +13,16 @@ on:
       - 'schema.json'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    outputs:
+      validation_failed: ${{ steps.schema_validation.outcome == 'failure' || steps.structure_validation.outcome == 'failure' }}
+      error_message: ${{ steps.schema_validation.outputs.error || steps.structure_validation.outputs.error }}
 
     steps:
       - name: Checkout repository
@@ -30,58 +37,179 @@ jobs:
         run: npm install -g ajv-cli ajv-formats
 
       - name: Validate CV against schema
-        run: ajv validate -s schema.json -d cv_ed_costa.json --spec=draft7
-
-      - name: Validate JSON syntax
+        id: schema_validation
+        continue-on-error: true
         run: |
-          echo "Validating cv_ed_costa.json syntax..."
-          python3 -c "import json; json.load(open('cv_ed_costa.json'))"
-          echo "Validating schema.json syntax..."
-          python3 -c "import json; json.load(open('schema.json'))"
-          echo "All JSON files are valid!"
+          echo "Validating cv_ed_costa.json against schema.json..."
+          if ! ajv validate -s schema.json -d cv_ed_costa.json --spec=draft7 -c ajv-formats 2>&1 | tee validation_output.txt; then
+            echo "error<<EOF" >> $GITHUB_OUTPUT
+            cat validation_output.txt >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          echo "Schema validation passed!"
 
-      - name: Check required fields
+      - name: Validate CV structure
+        id: structure_validation
+        continue-on-error: true
         run: |
           python3 << 'EOF'
           import json
+          import sys
+          import os
 
-          cv = json.load(open('cv_ed_costa.json'))
+          try:
+              with open('cv_ed_costa.json', 'r', encoding='utf-8') as f:
+                  cv = json.load(f)
+          except json.JSONDecodeError as e:
+              print(f"JSON Parse Error: {e}")
+              sys.exit(1)
 
           errors = []
 
-          # Check meta
+          # Validate meta section
           if 'meta' not in cv:
               errors.append("Missing 'meta' section")
-          elif 'version' not in cv['meta']:
-              errors.append("Missing 'meta.version'")
+          else:
+              meta = cv['meta']
+              if 'version' not in meta:
+                  errors.append("Missing 'meta.version'")
+              if 'language' not in meta:
+                  errors.append("Missing 'meta.language'")
+              if 'lastModified' not in meta:
+                  errors.append("Missing 'meta.lastModified'")
 
-          # Check basics
+          # Validate basics section
           if 'basics' not in cv:
               errors.append("Missing 'basics' section")
-          elif 'name' not in cv['basics'] or 'email' not in cv['basics']:
-              errors.append("Missing required fields in 'basics'")
+          else:
+              basics = cv['basics']
+              if 'name' not in basics:
+                  errors.append("Missing 'basics.name'")
+              if 'email' not in basics:
+                  errors.append("Missing 'basics.email'")
 
-          # Check work
-          if 'work' not in cv or len(cv['work']) == 0:
-              errors.append("Missing or empty 'work' section")
+          # Validate work section
+          if 'work' not in cv:
+              errors.append("Missing 'work' section")
+          elif not isinstance(cv['work'], list) or len(cv['work']) == 0:
+              errors.append("'work' section must be a non-empty array")
 
-          # Check education
-          if 'education' not in cv or len(cv['education']) == 0:
-              errors.append("Missing or empty 'education' section")
+          # Validate education section
+          if 'education' not in cv:
+              errors.append("Missing 'education' section")
+          elif not isinstance(cv['education'], list) or len(cv['education']) == 0:
+              errors.append("'education' section must be a non-empty array")
 
-          # Check skills
-          if 'skills' not in cv or len(cv['skills']) == 0:
-              errors.append("Missing or empty 'skills' section")
+          # Validate skills section
+          if 'skills' not in cv:
+              errors.append("Missing 'skills' section")
+          elif not isinstance(cv['skills'], list) or len(cv['skills']) == 0:
+              errors.append("'skills' section must be a non-empty array")
 
           if errors:
-              print("Validation errors:")
-              for e in errors:
-                  print(f"  - {e}")
-              exit(1)
-          else:
-              print("All required fields present!")
-              print(f"CV Version: {cv['meta']['version']}")
-              print(f"Work entries: {len(cv['work'])}")
-              print(f"Education entries: {len(cv['education'])}")
-              print(f"Skills categories: {len(cv['skills'])}")
+              error_msg = "Structure validation errors:\n" + "\n".join(f"  - {e}" for e in errors)
+              print(error_msg)
+
+              # Write to GITHUB_OUTPUT
+              with open(os.environ.get('GITHUB_OUTPUT', '/dev/null'), 'a') as f:
+                  f.write(f"error<<EOF\n{error_msg}\nEOF\n")
+
+              sys.exit(1)
+
+          # Success output
+          print("Structure validation passed!")
+          print(f"  CV Version: {cv['meta'].get('version', 'N/A')}")
+          print(f"  Language: {cv['meta'].get('language', 'N/A')}")
+          print(f"  Work entries: {len(cv.get('work', []))}")
+          print(f"  Education entries: {len(cv.get('education', []))}")
+          print(f"  Skills categories: {len(cv.get('skills', []))}")
+          print(f"  Certificates: {len(cv.get('certificates', []))}")
+          print(f"  Awards: {len(cv.get('awards', []))}")
           EOF
+
+      - name: Check validation results
+        id: check_results
+        run: |
+          FAILED=false
+
+          if [ "${{ steps.schema_validation.outcome }}" == "failure" ]; then
+            echo "::error::Schema validation failed"
+            FAILED=true
+          fi
+
+          if [ "${{ steps.structure_validation.outcome }}" == "failure" ]; then
+            echo "::error::Structure validation failed"
+            FAILED=true
+          fi
+
+          if [ "$FAILED" == "true" ]; then
+            echo "validation_failed=true" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+          echo "validation_failed=false" >> $GITHUB_OUTPUT
+          echo "All validations passed successfully!"
+
+  create-issue-on-failure:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: failure() && github.event_name == 'push'
+
+    steps:
+      - name: Create issue on validation failure
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `CV Validation Failed - ${new Date().toISOString().split('T')[0]}`;
+
+            // Check for existing open issues with same title pattern
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'validation-error'
+            });
+
+            const hasOpenIssue = existingIssues.data.some(issue =>
+              issue.title.startsWith('CV Validation Failed')
+            );
+
+            if (hasOpenIssue) {
+              console.log('An open validation issue already exists. Skipping creation.');
+              return;
+            }
+
+            const schemaError = `${{ needs.validate.outputs.error_message }}` || 'No details available';
+
+            const body = `## CV Validation Failed
+
+            **Commit:** ${context.sha}
+            **Branch:** ${context.ref}
+            **Triggered by:** ${context.actor}
+            **Workflow run:** [View logs](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+
+            ### Error Details
+
+            \`\`\`
+            ${schemaError}
+            \`\`\`
+
+            ### Actions Required
+
+            1. Review the error message above
+            2. Fix the validation issues in \`cv_ed_costa.json\` or \`schema.json\`
+            3. Push the fix to close this issue
+
+            ---
+            *This issue was automatically created by the CV validation workflow.*`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['validation-error', 'automated']
+            });
+
+            console.log('Issue created successfully');

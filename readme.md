@@ -250,7 +250,7 @@ const position_enUS = cv["x-i18n"]["en-US"].work[workId].position;
 
 ## 🔄 CI/CD - VALIDAÇÃO AUTOMÁTICA
 
-O repositório possui GitHub Actions configurado para validação automática.
+O repositório possui GitHub Actions configurado para validação automática com criação de issues em caso de falha.
 
 ### **Workflow: validate-cv.yml**
 
@@ -260,11 +260,24 @@ O repositório possui GitHub Actions configurado para validação automática.
 | `pull_request` (main) | Valida em PRs para main |
 | `workflow_dispatch` | Execução manual via GitHub |
 
+### **Jobs**
+
+| Job | Descrição |
+|-----|-----------|
+| `validate` | Executa validações de schema e estrutura |
+| `create-issue-on-failure` | Cria issue automática em caso de falha (apenas em push) |
+
 ### **Validações Executadas**
 
-1. **JSON Schema Validation** - Valida `cv_ed_costa.json` contra `schema.json` usando ajv-cli
-2. **JSON Syntax Check** - Verifica sintaxe válida de ambos os arquivos JSON
-3. **Required Fields Check** - Confirma presença de campos obrigatórios (meta, basics, work, education, skills)
+1. **JSON Schema Validation** - Valida `cv_ed_costa.json` contra `schema.json` usando ajv-cli (draft-07)
+2. **Structure Validation** - Verifica campos obrigatórios e tipos de dados esperados
+
+### **Criação Automática de Issues**
+
+Em caso de falha na validação (apenas em push para main):
+- Cria issue com label `validation-error` e `automated`
+- Inclui detalhes do erro, commit e link para logs
+- Não duplica issues se já existir uma aberta
 
 ### **Executar Localmente**
 
@@ -273,7 +286,7 @@ O repositório possui GitHub Actions configurado para validação automática.
 npm install -g ajv-cli ajv-formats
 
 # Validar
-ajv validate -s schema.json -d cv_ed_costa.json --spec=draft7
+ajv validate -s schema.json -d cv_ed_costa.json --spec=draft7 -c ajv-formats
 ```
 
 ---
