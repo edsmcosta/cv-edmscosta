@@ -1,0 +1,20 @@
+# CV Export Dependencies
+# Install: pip install -r requirements.txt
+
+# Template engine
+Jinja2>=3.1.0
+
+# PDF generation - Option 1: WeasyPrint (requires GTK3 on Windows)
+# weasyprint>=60.0
+
+# PDF generation - Option 2: xhtml2pdf (pure Python, works everywhere)
+xhtml2pdf>=0.2.11
+
+# DOCX generation
+python-docx>=1.1.0
+
+# JSON handling (standard library, but listed for clarity)
+# json - built-in
+
+# Optional: for development
+# watchdog>=3.0.0  # auto-reload on file changes
