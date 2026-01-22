@@ -20,6 +20,7 @@
 ✅ Compatibilidade com múltiplos ATS
 ✅ Keywords estruturadas por categoria
 ✅ Suporte multilíngue (pt-BR / en-US)
+✅ CI/CD com GitHub Actions
 
 ---
 
@@ -149,7 +150,7 @@ keywords/
 - [x] Implementar JSON Schema reference
 - [x] Criar schema de validação separado (`schema.json`)
 - [ ] Testar parsing em ATS reais
-- [ ] Automatizar validação via CI/CD
+- [x] Automatizar validação via CI/CD
 
 ---
 
@@ -157,9 +158,12 @@ keywords/
 
 ```
 cv-edmscosta/
-├── cv_ed_costa.json    # CV completo em JSON Resume + ATS
-├── schema.json         # JSON Schema para validação
-└── readme.md           # Este documento
+├── .github/
+│   └── workflows/
+│       └── validate-cv.yml   # CI/CD para validação automática
+├── cv_ed_costa.json          # CV completo em JSON Resume + ATS
+├── schema.json               # JSON Schema para validação
+└── readme.md                 # Este documento
 ```
 
 ---
@@ -244,6 +248,36 @@ const position_enUS = cv["x-i18n"]["en-US"].work[workId].position;
 
 ---
 
+## 🔄 CI/CD - VALIDAÇÃO AUTOMÁTICA
+
+O repositório possui GitHub Actions configurado para validação automática.
+
+### **Workflow: validate-cv.yml**
+
+| Trigger | Descrição |
+|---------|-----------|
+| `push` (main) | Valida em push para branch main |
+| `pull_request` (main) | Valida em PRs para main |
+| `workflow_dispatch` | Execução manual via GitHub |
+
+### **Validações Executadas**
+
+1. **JSON Schema Validation** - Valida `cv_ed_costa.json` contra `schema.json` usando ajv-cli
+2. **JSON Syntax Check** - Verifica sintaxe válida de ambos os arquivos JSON
+3. **Required Fields Check** - Confirma presença de campos obrigatórios (meta, basics, work, education, skills)
+
+### **Executar Localmente**
+
+```bash
+# Instalar dependências
+npm install -g ajv-cli ajv-formats
+
+# Validar
+ajv validate -s schema.json -d cv_ed_costa.json --spec=draft7
+```
+
+---
+
 ## 🔧 RECOMENDAÇÕES PARA FEATURES PENDENTES
 
 ### **Mapeamento Workday/Indeed**
@@ -266,24 +300,6 @@ Estrutura recomendada para integração com ATS específicos:
     }
   }
 }
-```
-
-### **Automação CI/CD**
-
-Configurar GitHub Actions para validação automática:
-
-```yaml
-name: Validate CV JSON
-on: [push, pull_request]
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Validate JSON
-        run: |
-          npm install -g ajv-cli
-          ajv validate -s schema.json -d cv_ed_costa.json
 ```
 
 ---

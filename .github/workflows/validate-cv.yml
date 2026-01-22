@@ -1,0 +1,87 @@
+name: Validate CV JSON
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cv_ed_costa.json'
+      - 'schema.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cv_ed_costa.json'
+      - 'schema.json'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ajv-cli
+        run: npm install -g ajv-cli ajv-formats
+
+      - name: Validate CV against schema
+        run: ajv validate -s schema.json -d cv_ed_costa.json --spec=draft7
+
+      - name: Validate JSON syntax
+        run: |
+          echo "Validating cv_ed_costa.json syntax..."
+          python3 -c "import json; json.load(open('cv_ed_costa.json'))"
+          echo "Validating schema.json syntax..."
+          python3 -c "import json; json.load(open('schema.json'))"
+          echo "All JSON files are valid!"
+
+      - name: Check required fields
+        run: |
+          python3 << 'EOF'
+          import json
+
+          cv = json.load(open('cv_ed_costa.json'))
+
+          errors = []
+
+          # Check meta
+          if 'meta' not in cv:
+              errors.append("Missing 'meta' section")
+          elif 'version' not in cv['meta']:
+              errors.append("Missing 'meta.version'")
+
+          # Check basics
+          if 'basics' not in cv:
+              errors.append("Missing 'basics' section")
+          elif 'name' not in cv['basics'] or 'email' not in cv['basics']:
+              errors.append("Missing required fields in 'basics'")
+
+          # Check work
+          if 'work' not in cv or len(cv['work']) == 0:
+              errors.append("Missing or empty 'work' section")
+
+          # Check education
+          if 'education' not in cv or len(cv['education']) == 0:
+              errors.append("Missing or empty 'education' section")
+
+          # Check skills
+          if 'skills' not in cv or len(cv['skills']) == 0:
+              errors.append("Missing or empty 'skills' section")
+
+          if errors:
+              print("Validation errors:")
+              for e in errors:
+                  print(f"  - {e}")
+              exit(1)
+          else:
+              print("All required fields present!")
+              print(f"CV Version: {cv['meta']['version']}")
+              print(f"Work entries: {len(cv['work'])}")
+              print(f"Education entries: {len(cv['education'])}")
+              print(f"Skills categories: {len(cv['skills'])}")
+          EOF
