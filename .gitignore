@@ -1,1 +1,13 @@
 MELHORIAS_CONTEUDO.md
+
+# Export output files
+export/output/*.pdf
+export/output/*.docx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+.venv/

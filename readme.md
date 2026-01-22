@@ -5,8 +5,15 @@
 
 ## 📋 STATUS DA IMPLEMENTAÇÃO
 
-### **Versão Atual: 2.1.0**
-**Última atualização:** 2026-01-17
+### **Versão Atual: 2.2.0**
+**Última atualização:** 2026-01-22
+
+**Novidades da v2.2.0:**
+- ✨ Novo padrão de nomenclatura de arquivos: `CV - Ed Costa (YYYY-MM-DD) - {idioma}.ext`
+- ✨ Sistema de controle automático de versões com incremento `(n)`
+- 🔧 Simplificação do Export Tool (removido template "modern", mantido apenas ATS)
+- 📚 Documentação atualizada e expandida
+- 🎯 Foco em otimização ATS
 
 ### **Features Implementadas:**
 ✅ Padrão JSON Resume v1.0.0 com extensões ATS
@@ -21,6 +28,7 @@
 ✅ Keywords estruturadas por categoria
 ✅ Suporte multilíngue (pt-BR / en-US)
 ✅ CI/CD com GitHub Actions
+✅ Export Tool com nomenclatura padronizada
 
 ---
 
@@ -161,10 +169,55 @@ cv-edmscosta/
 ├── .github/
 │   └── workflows/
 │       └── validate-cv.yml   # CI/CD para validação automática
+├── export/
+│   ├── templates/
+│   │   └── ats_template.html # Template ATS para PDF
+│   ├── output/               # Arquivos exportados
+│   ├── export_cv.py          # Script de exportação
+│   ├── requirements.txt      # Dependências Python
+│   └── README.md             # Documentação do Export Tool
 ├── cv_ed_costa.json          # CV completo em JSON Resume + ATS
 ├── schema.json               # JSON Schema para validação
 └── readme.md                 # Este documento
 ```
+
+---
+
+## 📄 EXPORT TOOL
+
+O repositório inclui uma ferramenta de exportação para converter o CV JSON em formatos visuais (PDF e DOCX).
+
+### **Nomenclatura de Arquivos**
+
+Padrão: `CV - Ed Costa (YYYY-MM-DD) - {idioma}.{extensão}`
+
+Exemplos:
+- `CV - Ed Costa (2026-01-22) - pt-BR.pdf`
+- `CV - Ed Costa (2026-01-22) - en-US.docx`
+
+### **Controle de Versão Automático**
+
+Se o arquivo já existir, adiciona `(n)` antes da extensão:
+- `CV - Ed Costa (2026-01-22) - pt-BR (1).pdf`
+- `CV - Ed Costa (2026-01-22) - pt-BR (2).pdf`
+
+### **Uso Rápido**
+
+```bash
+cd export
+pip install -r requirements.txt
+
+# Exportar todas as versões (pt-BR e en-US)
+python export_cv.py --all-langs
+
+# Exportar apenas português
+python export_cv.py --lang pt-BR
+
+# Exportar apenas PDF
+python export_cv.py --format pdf
+```
+
+Documentação completa: [export/README.md](export/README.md)
 
 ---
 
