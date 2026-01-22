@@ -4,7 +4,7 @@
   "meta": {
     "version": "2.1.0",
     "canonical": "https://edsmcosta.com/resume",
-    "lastModified": "2026-01-17T04:00:00Z",
+    "lastModified": "2026-01-22T12:00:00Z",
     "created": "2020-07-05T00:00:00Z",
     "language": "pt-BR",
     "locales": ["pt-BR", "en-US"],
@@ -66,6 +66,27 @@
     ]
   },
   "work": [
+    {
+      "id": "work-000",
+      "name": "EMC Data Lab",
+      "position": "Consultor de Power BI (PJ)",
+      "location": "Remoto / Carajás, PA, Brasil",
+      "url": "https://emcdl.com.br",
+      "startDate": "2025-08-01",
+      "endDate": null,
+      "summary": "Consultoria técnica para o Grupo ENESA no Projeto S11D (Vale - Carajás). Desenvolvimento de solução de Business Intelligence para monitoramento de indicadores de Saúde e Segurança Ocupacional (SSO), incluindo dashboards de análise crítica, estratificação de INIs e acompanhamento de eventos.",
+      "highlights": [
+        "Dashboard de Análise Crítica: Indicadores semanais de SSO (taxas de frequência, gravidade, HHT)",
+        "Painel de Estratificação de INIs: Interdições, Notificações e Intervenções",
+        "Modelagem de dados e estruturação de planilha base para cálculo de indicadores",
+        "Documentação técnica e treinamento de equipe operacional",
+        "Stack: Power BI, DAX, PowerQuery M, Excel"
+      ],
+      "keywords": [
+        "Business Intelligence", "Power BI", "SSMA", "SSO", "KPIs",
+        "Data Modeling", "Dashboard Development", "Mining Industry", "Vale"
+      ]
+    },
     {
       "id": "work-001",
       "name": "Progen S.A.",
@@ -664,7 +685,7 @@
         "NR-23", "NR-35"
       ],
       "companies": [
-        "Vale", "Progen", "UFBA", "Braskem", "BAMIN"
+        "Vale", "Progen", "UFBA", "Braskem", "BAMIN", "ENESA", "EMC Data Lab"
       ]
     },
     "quantifiedAchievements": [
@@ -754,6 +775,17 @@
         "summary": "Data-driven professional with 11+ years of experience in technology, engineering, and continuous improvement. Specialist in Business Intelligence, Data Engineering, and EHS (Environment, Health & Safety). Computer Engineering graduate, I work integrating processes and areas through technological solutions that increase reliability, reduce risks, and optimize results. Experience in data extraction, modeling, analysis, and visualization with proficiency in Python, JavaScript, SQL, Power BI, Azure Services, and Databricks."
       },
       "work": {
+        "work-000": {
+          "position": "Power BI Consultant (Contractor)",
+          "summary": "Technical consulting for Grupo ENESA on the S11D Project (Vale - Carajás). Development of Business Intelligence solution for monitoring Occupational Health and Safety (OHS) indicators, including critical analysis dashboards, INI stratification, and event tracking.",
+          "highlights": [
+            "Critical Analysis Dashboard: Weekly OHS indicators (frequency rates, severity, worked hours)",
+            "INI Stratification Panel: Interdictions, Notifications, and Interventions",
+            "Data modeling and base spreadsheet structuring for indicator calculation",
+            "Technical documentation and operational team training",
+            "Stack: Power BI, DAX, PowerQuery M, Excel"
+          ]
+        },
         "work-001": {
           "position": "Senior Systems Analyst",
           "summary": "Working on strategic projects for Vale S.A.: Valor Social Norte (20+ construction sites) and ConnectData Initiative (Corporate EHS). Responsible for data model definition, report development, EHS process optimization, and corporate systems integration.",
