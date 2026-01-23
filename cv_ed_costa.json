@@ -2,9 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "$id": "https://edsmcosta.com/resume/v2.json",
   "meta": {
-    "version": "2.2.0",
+    "version": "2.3.0",
     "canonical": "https://edsmcosta.com/resume",
-    "lastModified": "2026-01-22T20:00:00Z",
+    "lastModified": "2026-01-22T22:00:00Z",
     "created": "2020-07-05T00:00:00Z",
     "language": "pt-BR",
     "locales": ["pt-BR", "en-US"],
@@ -39,7 +39,7 @@
   },
   "basics": {
     "name": "Ed Santana Martins Costa",
-    "label": "Engenheiro da Computação | Analista e Engenheiro de Dados",
+    "label": "Engenheiro da Computação | Especialista em Engenharia de Segurança do Trabalho | Analista e Engenheiro de Dados",
     "image": "",
     "email": "ed.costa@emcdl.com.br",
     "phone": "+55 (71) 9 9956-5197",
@@ -56,12 +56,14 @@
       {
         "network": "LinkedIn",
         "username": "edsmcosta",
-        "url": "https://linkedin.com/in/edsmcosta"
+        "url": "https://linkedin.com/in/edsmcosta",
+        "label": "LinkedIn Profile"
       },
       {
         "network": "GitHub",
         "username": "edsmcosta",
-        "url": "https://github.com/edsmcosta"
+        "url": "https://github.com/edsmcosta",
+        "label": "GitHub Portfolio"
       }
     ]
   },
@@ -74,38 +76,61 @@
       "url": "https://emcdl.com.br",
       "startDate": "2025-08-01",
       "endDate": null,
-      "summary": "Consultoria técnica para o Grupo ENESA no Projeto S11D (Vale - Carajás). Desenvolvimento de solução de Business Intelligence para monitoramento de indicadores de Saúde e Segurança Ocupacional (SSO), incluindo dashboards de análise crítica, estratificação de INIs e acompanhamento de eventos.",
+      "summary": "Consultoria técnica especializada para o Grupo ENESA no Projeto S11D (Vale - Carajás). Desenvolvimento end-to-end de solução de Business Intelligence para monitoramento de indicadores de Saúde e Segurança Ocupacional (SSO), incluindo dashboards de análise crítica, estratificação de INIs e acompanhamento de eventos de segurança.",
       "highlights": [
-        "Dashboard de Análise Crítica: Indicadores semanais de SSO (taxas de frequência, gravidade, HHT)",
-        "Painel de Estratificação de INIs: Interdições, Notificações e Intervenções",
-        "Modelagem de dados e estruturação de planilha base para cálculo de indicadores",
-        "Documentação técnica e treinamento de equipe operacional",
-        "Stack: Power BI, DAX, PowerQuery M, Excel"
+        "Dashboard de Análise Crítica: Desenvolvimento de indicadores semanais de SSO (taxas de frequência, gravidade, HHT - homem-hora trabalhada) com drill-down por área e período",
+        "Painel de Estratificação de INIs: Visualização e análise de Interdições, Notificações e Intervenções com KPIs estratégicos para tomada de decisão gerencial",
+        "Modelagem de dados dimensional e estruturação de planilha base otimizada para cálculo automatizado de indicadores de segurança conforme metodologia Vale",
+        "Criação de documentação técnica completa e condução de treinamento hands-on para equipe operacional (8+ usuários finais)",
+        "Implementação de refresh automático e validação de dados com DAX avançado para garantir integridade e acuracidade dos KPIs",
+        "Stack técnico: Power BI Desktop/Service, DAX, PowerQuery M, Excel, SharePoint integration"
       ],
       "keywords": [
-        "Business Intelligence", "Power BI", "SSMA", "SSO", "KPIs",
-        "Data Modeling", "Dashboard Development", "Mining Industry", "Vale"
+        "Business Intelligence", "Power BI Consultant", "BI Consulting", "Power BI", "DAX", "PowerQuery M",
+        "SSMA", "SSO", "Saúde e Segurança Ocupacional", "Occupational Health and Safety",
+        "KPIs", "KPI Development", "Safety Indicators", "Mining Safety",
+        "Data Modeling", "Dimensional Modeling", "Dashboard Development", "Data Visualization",
+        "Mining Industry", "Vale", "Grupo ENESA", "Projeto S11D", "Carajás",
+        "Technical Documentation", "User Training", "Client Consulting",
+        "Excel Advanced", "SharePoint", "Data Validation", "Data Quality",
+        "Frequency Rate", "Severity Rate", "HHT", "INI Stratification"
       ]
     },
     {
       "id": "work-001",
       "name": "Progen S.A.",
-      "position": "Analista de Sistemas Senior",
+      "position": "Analista de Sistemas Senior III",
       "location": "Belém, PA, Brasil",
       "url": "",
       "startDate": "2024-03-01",
       "endDate": "2025-07-31",
-      "summary": "Atuação em projetos estratégicos da Vale S.A.: Valor Social Norte (20+ obras) e Iniciativa ConnectData (SSMA Corporativo). Responsável por definição de modelos de dados, desenvolvimento de relatórios, otimização de processos SSMA e integração de sistemas corporativos.",
+      "summary": "Atuação em projetos estratégicos de grande escala da Vale S.A.: Valor Social Norte (20+ obras simultâneas em todo estado do Pará) e Iniciativa ConnectData (SSMA Corporativo). Responsável por definição e estruturação de modelos de dados, análise e desenvolvimento de relatórios gerenciais, modelagem e otimização de processos SSMA, e integração end-to-end de sistemas corporativos.",
       "highlights": [
-        "Certificações: NR-23 (Brigadista) e NR-35 (Trabalho em Altura)",
-        "Integração de sistemas: SAP-IM, SGC, Sitrack, Stratws",
-        "Stack: PowerPlatform, DataBricks (Python), Azure Analysis Services, SAP BO/Hana",
-        "Testes white-box e black-box em aplicações mobile",
-        "Treinamento de equipes operacionais"
+        "Gestão de dados para 20+ obras simultâneas do projeto Valor Social Norte abrangendo todo o estado do Pará",
+        "Participação ativa na Iniciativa ConnectData, endossada pelo setor Corporativo de SSMA da Vale, para unificação de dados de segurança",
+        "Colaboração em processos críticos: Gestão de Simulados, Eventos de Segurança, Requisitos Legais, LAIA (Levantamento e Análise de Aspectos e Impactos), Segurança de Processos",
+        "Representante de Processo SAP-Íris e ponto focal para Diário de Bordo digital e Sistemas de gestão",
+        "Integração complexa de sistemas corporativos: SAP-IM (Incident Management), SGC (Gestão de Contratadas), Sitrack (Telemetria), Stratws (Indicadores de Negócio)",
+        "Desenvolvimento de pipelines de dados com DataBricks (Python) e Azure Analysis Services para processamento de grandes volumes de dados SSMA",
+        "Realização de testes white-box e black-box em aplicativos mobile de campo, garantindo qualidade e usabilidade para equipes operacionais",
+        "Treinamento e capacitação de 15+ usuários em ferramentas operacionais desenvolvidas (PowerApps, Power BI, sistemas integrados)",
+        "Certificações obtidas: NR-23 (Brigadista) e NR-35 (Trabalho em Altura) para atuação em campo em projetos de mineração",
+        "Stack técnico completo: PowerPlatform (PowerApps, PowerAutomate, Power BI), SharePoint, DataBricks (Python), Azure Analysis Services, SAP BO/Hana, Azure DevOps"
       ],
       "keywords": [
-        "Data Engineering", "Business Intelligence", "SSMA", "Power BI",
-        "Azure", "SAP", "Python", "DataBricks", "PowerPlatform"
+        "Data Engineering", "Business Intelligence", "Senior Systems Analyst",
+        "SSMA", "SSO", "Safety Management", "EHS Management",
+        "Power BI", "PowerPlatform", "PowerApps", "PowerAutomate", "SharePoint",
+        "Azure", "Azure Analysis Services", "Databricks", "Python", "PySpark",
+        "SAP", "SAP-IM", "SAP Hana", "SAP BO",
+        "Systems Integration", "Enterprise Systems", "Data Pipeline",
+        "Vale S.A.", "Mining Industry", "Valor Social Norte", "ConnectData",
+        "SGC", "Sitrack", "Stratws", "Incident Management",
+        "Mobile Testing", "White-box Testing", "Black-box Testing", "QA",
+        "User Training", "Technical Training", "Team Training",
+        "NR-23", "NR-35", "Brigadista", "Safety Certifications",
+        "Requirements Gathering", "Process Optimization", "Data Modeling",
+        "ETL", "Data Integration", "Corporate Systems"
       ]
     },
     {
@@ -174,17 +199,33 @@
       "url": "",
       "startDate": "2020-01-01",
       "endDate": "2022-06-30",
-      "summary": "Gestão de informação em múltiplos contratos (Vale S.A., Braskem, Brasil BioFuels). Especialista em SSMA com foco em modelagem de dados e desenvolvimento de soluções PowerPlatform.",
+      "summary": "Gestão estratégica de informação em múltiplos contratos simultâneos (Vale S.A., Braskem, Brasil BioFuels). Especialista em SSMA com foco em modelagem de dados, desenvolvimento de soluções PowerPlatform e otimização de processos críticos de segurança e meio ambiente.",
       "highlights": [
-        "🏆 Kaizen do Mês (Jul/2021) - PowerApp para Gestão de Mudanças (Vale Metais Básicos)",
-        "Comitê COVID Vale - Corredor Norte: Modelo analítico e dashboards estratégicos",
-        "Acelerar processos críticos em 30% com PowerApps/PowerAutomate",
-        "Implantação EasySystem (Descaracterização de Barragens - MG)",
-        "Metodologia VPS (Vale Production System) - Lean Six Sigma"
+        "🏆 Kaizen do Mês (Julho/2021) - Desenvolvimento de PowerApp inovador para Gestão de Mudanças (Vale Metais Básicos), reconhecido pela alta direção",
+        "Membro do Comitê COVID-19 Vale - Corredor Norte: Criação de modelo analítico completo e dashboards estratégicos para monitoramento de casos, protocolos e indicadores de saúde",
+        "Aceleração de 30% em processos críticos através de automação com PowerApps e PowerAutomate, medido em tempo de ciclo e aprovações",
+        "Implantação bem-sucedida do sistema EasySystem em campo para projeto de Descaracterização de Barragens (MG), incluindo treinamento de 10+ usuários",
+        "Aplicação da metodologia VPS (Vale Production System) alinhada ao Lean Six Sigma para melhoria contínua de processos SSMA",
+        "Definição e estruturação de modelos de dados para garantir integridade e rastreabilidade de informações de segurança",
+        "Análise e desenvolvimento de relatórios gerenciais usando Power BI, Azure Analysis Services e SQL",
+        "Integração com sistemas corporativos: SAP-IM (Gestão de Incidentes), SGC (Gestão de Contratadas), VES (Treinamentos), GCM (Contingenciamento Médico), Stratws (Indicadores)",
+        "Apoio em análise e dimensionamento de soluções em TI, incluindo gestão de contratos e avaliação de performance",
+        "Contratos gerenciados: Vale S.A., Braskem, Brasil BioFuels, EasySystem"
       ],
       "keywords": [
-        "SSMA", "Data Management", "Power BI", "PowerApps", "Azure",
-        "Lean Six Sigma", "VPS", "Vale", "COVID Analytics"
+        "SSMA", "EHS Management", "Safety Management", "Environmental Management",
+        "Data Management", "Information Management", "Data Governance",
+        "Power BI", "PowerApps", "PowerAutomate", "Azure Analysis Services",
+        "PowerPlatform", "Microsoft Forms", "SharePoint", "Azure",
+        "Lean Six Sigma", "VPS", "Vale Production System", "Kaizen", "Continuous Improvement",
+        "Process Optimization", "Process Automation", "Workflow Automation",
+        "Vale", "Vale S.A.", "Vale Metais Básicos", "Braskem", "Brasil BioFuels",
+        "COVID Analytics", "Health Monitoring", "Pandemic Response",
+        "Change Management", "Award Winner", "Recognition",
+        "SAP-IM", "SGC", "VES", "GCM", "Stratws", "Systems Integration",
+        "EasySystem", "Dam Decharacterization", "Mining Safety",
+        "Contract Management", "Multi-contract Management",
+        "SQL", "Data Modeling", "ETL", "Reporting"
       ]
     },
     {
@@ -215,17 +256,35 @@
       "url": "https://vale.com",
       "startDate": "2018-06-01",
       "endDate": "2019-05-31",
-      "summary": "Setor SSMA: Integração, análise, modelagem e visualização de dados. Desenvolvimento de dashboards Power BI.",
+      "summary": "Setor de SSMA: Integração, análise, modelagem e visualização de dados. Desenvolvimento de dashboards interativos em Power BI e automação de processos administrativos críticos de segurança.",
       "highlights": [
-        "📊 Ganho de 80% em performance no fechamento mensal (medido em tempo e pessoas)",
-        "Benchmark: Segurança do Trabalho - Vale São Luís (MA)",
-        "Dashboards Power BI para KPIs de SSMA",
-        "Automação: Validação de requisitos e geração de carteiras de habilitação",
-        "Stack: Power BI, SAP Hana, Excel/VBA"
+        "📊 Ganho verificado de 80% em performance no fechamento mensal do setor SSMA (medido em tempo de execução e número de pessoas envolvidas)",
+        "Mapeamento completo de processos administrativos utilizando Normas e Diretrizes internas e externas (NRs) para validação da informação",
+        "Definição de diagrama de relacionamento de entidades (ERD) para estruturação do modelo de dados SSMA",
+        "Desenvolvimento de dashboards Power BI interativos para KPIs críticos: taxas de frequência, absenteísmo, indicadores proativos e reativos",
+        "Realização de benchmark na unidade Vale São Luís (MA) no setor de Segurança do Trabalho, trazendo best practices",
+        "Diário de Bordo: Mapeamento de equipes e valoração de indicadores de desempenho por área",
+        "Central de Ações: Integração de sistema corporativo com controles paralelos em Excel para rastreabilidade",
+        "Automação completa de processo administrativo para validar requisitos de atividades críticas e gerar carteiras de habilitação para funcionários usando Node.js e VBA",
+        "Disponibilização de dados através dos módulos SAP LUMIRA e HANA com otimização de queries",
+        "Definição de modelo padronizado de tabelas em planilhas de controle secundário, reduzindo inconsistências",
+        "Stack técnico: Power BI Desktop/Service, SAP Hana, SAP LUMIRA, Excel/VBA, Node.js"
       ],
       "keywords": [
-        "SSMA", "Power BI", "SAP Hana", "KPIs", "Data Visualization",
-        "Performance Improvement", "Business Intelligence"
+        "SSMA", "EHS", "Safety Management", "Occupational Safety",
+        "Power BI", "SAP Hana", "SAP LUMIRA", "Business Intelligence",
+        "KPIs", "Safety KPIs", "Safety Indicators", "Data Visualization",
+        "Performance Improvement", "Process Optimization", "80% improvement",
+        "Vale", "Vale Manganês", "Mining Industry",
+        "Process Mapping", "ERD", "Entity Relationship Diagram", "Data Modeling",
+        "Benchmarking", "Best Practices", "Vale São Luís",
+        "Dashboard Development", "Interactive Dashboards",
+        "Frequency Rate", "Absenteeism", "Proactive Indicators", "Reactive Indicators",
+        "Automation", "Process Automation", "VBA", "Node.js",
+        "Training Records", "Credential Management", "Licensing System",
+        "SAP Integration", "Excel", "Control Sheets",
+        "NRs", "Normas Regulamentadoras", "Regulatory Compliance",
+        "Monthly Closing", "Reporting Automation"
       ]
     },
     {
@@ -677,49 +736,148 @@
         "Analytics Engineer"
       ],
       "technical": [
-        "Python", "JavaScript", "SQL", "Power BI", "DAX",
-        "PowerQuery M", "Azure", "Databricks", "SAP",
-        "PowerApps", "PowerAutomate", "SharePoint",
-        "ETL", "Data Modeling", "Data Warehousing"
+        "Python", "JavaScript", "SQL", "NoSQL", "Power BI", "DAX",
+        "PowerQuery M", "Azure", "Databricks", "SAP", "SAP Hana", "SAP BO",
+        "PowerApps", "PowerAutomate", "SharePoint", "Microsoft Fabric",
+        "ETL", "ELT", "Data Modeling", "Data Warehousing", "Data Pipeline",
+        "Azure Analysis Services", "Azure DevOps", "SQL Server", "MySQL", "PostgreSQL",
+        "MongoDB", "CouchDB", "Kafka", "Docker", "Git",
+        "Node.js", "React.js", "Express.js", "HTML", "CSS",
+        "VBA", "C#", ".NET Core", "Rust", "Shell Script",
+        "MapReduce", "D3.js", "Jinja2", "REST API",
+        "SAP-IM", "SAP BTP", "Sitrack", "Stratws", "SGC",
+        "HP ALM", "Mantis", "Redmine", "JIRA",
+        "Entity Framework", "Razor", "ASP.NET MVC",
+        "VMWare", "Windows Server", "IIS",
+        "Allen Bradley", "Rockwell", "Siemens PLC", "S7-1500",
+        "IoT", "Embedded Systems", "Microcontrollers", "Sensors",
+        "KPI Design", "Dashboard Development", "Data Visualization",
+        "Data Quality", "Data Governance", "Query Optimization"
       ],
       "soft": [
         "Leadership", "Team Collaboration", "Problem Solving",
         "Continuous Improvement", "Training & Development",
-        "Stakeholder Management", "Agile Mindset"
+        "Stakeholder Management", "Agile Mindset", "Critical Thinking",
+        "Analytical Skills", "Communication", "Process Optimization",
+        "Requirements Gathering", "Technical Documentation",
+        "Client Facing", "Cross-functional Collaboration",
+        "Mentoring", "Coaching", "Project Coordination",
+        "Risk Management", "Change Management", "Innovation",
+        "Attention to Detail", "Time Management", "Adaptability",
+        "Strategic Planning", "Decision Making"
       ],
       "methodologies": [
-        "Lean Six Sigma", "Agile", "Scrum", "DevOps",
-        "BPMN", "VPS", "Kaizen", "DMAIC"
+        "Lean Six Sigma", "Six Sigma Yellow Belt", "Six Sigma Black Belt",
+        "Agile", "Scrum", "DevOps", "CI/CD",
+        "BPMN", "VPS", "Vale Production System", "Kaizen", "DMAIC",
+        "Safety in Design", "Safety Review",
+        "Test Driven Development", "White-box Testing", "Black-box Testing",
+        "Regression Testing", "Requirements Analysis",
+        "Process Mapping", "Root Cause Analysis",
+        "Lean Manufacturing", "Continuous Integration"
       ],
       "industries": [
-        "Mining", "Metals", "Safety", "Healthcare",
-        "Construction Tech", "Industrial Automation"
+        "Mining", "Metals", "Mining Industry", "Mineral Processing",
+        "Safety", "Occupational Health and Safety", "SSMA", "SSO", "SESMT",
+        "Healthcare", "Hospital Management", "Health IT",
+        "Construction Tech", "Civil Construction", "Architecture",
+        "Industrial Automation", "SCADA", "Industrial IT",
+        "Telecommunications", "5G Networks",
+        "Oil & Gas", "Energy", "Manufacturing",
+        "Consulting", "Technology Consulting", "IT Consulting",
+        "Education", "EdTech", "Training & Development"
       ],
       "certifications": [
-        "ISTQB", "Scrum Certified", "Six Sigma Yellow Belt",
-        "NR-23", "NR-35"
+        "ISTQB", "ISTQB Certified Tester", "Foundation Level",
+        "Scrum Certified", "Scrum Fundamentals",
+        "Six Sigma Yellow Belt", "Six Sigma White Belt",
+        "Lean Six Sigma Black Belt", "MBA Executivo",
+        "NR-23", "Brigadista", "Fire Brigade",
+        "NR-35", "Trabalho em Altura", "Working at Heights",
+        "Engenharia de Segurança do Trabalho",
+        "Occupational Safety Engineering",
+        "Microsoft AI-102", "Azure AI Engineer",
+        "Microsoft PL-300", "Power BI Data Analyst",
+        "SAP BTP Clean Core", "SAP Certified",
+        "BPMN Certified", "ISO 9001:2015",
+        "Udacity Nanodegree", "Web Front-End Advanced",
+        "CEFR B2", "English for Academic Purpose"
       ],
       "companies": [
-        "Vale", "Progen", "UFBA", "Braskem", "BAMIN", "ENESA", "EMC Data Lab"
+        "Vale", "Vale S.A.", "Vale Manganês", "Vale Metais Básicos",
+        "Progen", "Progen S.A.",
+        "UFBA", "Universidade Federal da Bahia",
+        "Braskem", "BAMIN", "Porto Sul",
+        "ENESA", "Grupo ENESA",
+        "EMC Data Lab",
+        "Triadd", "Triadd Consulting",
+        "Logon Engenharia", "Logon Gerenciamento",
+        "INFINITY SCHOOL", "Visual Art Creative Center",
+        "uRBAN", "SKBO",
+        "UNO Consultoria", "UNO Tecnologia",
+        "BRISA", "BRISA TI",
+        "FAPESB", "UNIFACS", "Universidade Salvador",
+        "Softex", "CNPq",
+        "Brasil BioFuels", "Biopalma",
+        "Intermarítima"
+      ],
+      "jobTitles": [
+        "Consultor", "Consultant", "Consultor de Power BI",
+        "Analista de Sistemas", "Systems Analyst", "Senior Systems Analyst",
+        "Analista Senior", "Senior Analyst",
+        "Engenheiro de Dados", "Data Engineer",
+        "Analista de Dados", "Data Analyst",
+        "Desenvolvedor", "Developer", "Software Developer",
+        "Instrutor", "Instructor", "IT Instructor",
+        "Especialista", "Specialist", "Implementation Specialist",
+        "Bolsista", "Research Fellow", "Scholar",
+        "Estagiário", "Intern", "Engineering Intern",
+        "Técnico", "Technician", "Technical Support",
+        "Quality Assurance", "QA Engineer", "QA Tester",
+        "Auxiliar de Pesquisa", "Research Assistant"
       ]
     },
     "quantifiedAchievements": [
       {
-        "description": "80% performance improvement in monthly closing",
-        "metric": "Time reduction",
-        "context": "Power BI implementation at Vale Manganês",
+        "description": "80% performance improvement in monthly closing (measured in time and people)",
+        "metric": "Time reduction & Resource optimization",
+        "context": "Power BI dashboards and automation implementation at Vale Manganês SSMA sector",
         "verified": true
       },
       {
         "description": "30% acceleration in critical processes",
         "metric": "Process efficiency",
-        "context": "PowerApps/PowerAutomate implementation at Triadd",
+        "context": "PowerApps/PowerAutomate implementation for workflow automation at Triadd - Vale projects",
         "verified": true
       },
       {
-        "description": "Kaizen do Mês award",
+        "description": "Kaizen do Mês award (July 2021)",
         "metric": "Innovation recognition",
-        "context": "PowerApp for Change Management - Vale",
+        "context": "PowerApp for Change Management - Vale Metais Básicos",
+        "verified": true
+      },
+      {
+        "description": "20+ construction sites managed simultaneously",
+        "metric": "Project scale",
+        "context": "Valor Social Norte project - Vale S.A. through Progen",
+        "verified": true
+      },
+      {
+        "description": "ConnectData Initiative implementation",
+        "metric": "Corporate-wide SSMA system",
+        "context": "Corporate SSMA integration for Vale S.A.",
+        "verified": true
+      },
+      {
+        "description": "1st place in 3 hackathons (2015, 2017, 2019)",
+        "metric": "Innovation & Competition",
+        "context": "Technology solutions for business challenges",
+        "verified": true
+      },
+      {
+        "description": "2 scientific publications (1 Journal + 1 Conference)",
+        "metric": "Academic contribution",
+        "context": "Research in Data Visualization and Cloud Migration",
         "verified": true
       }
     ],
@@ -786,7 +944,7 @@
   "x-i18n": {
     "en-US": {
       "basics": {
-        "label": "Computer Engineer | Data Analyst & Engineer",
+        "label": "Computer Engineer | Specialist in Occupational Safety Engineering | Data Analyst & Engineer",
         "summary": "Data-driven professional with 11+ years of experience in technology, engineering, and continuous improvement. Specialist in Business Intelligence, Data Engineering, and EHS (Environment, Health & Safety). Computer Engineering graduate, I work integrating processes and areas through technological solutions that increase reliability, reduce risks, and optimize results. Experience in data extraction, modeling, analysis, and visualization with proficiency in Python, JavaScript, SQL, Power BI, Azure Services, and Databricks."
       },
       "work": {

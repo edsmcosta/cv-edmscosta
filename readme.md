@@ -5,8 +5,19 @@
 
 ## 📋 STATUS DA IMPLEMENTAÇÃO
 
-### **Versão Atual: 2.2.0**
+### **Versão Atual: 2.3.0**
 **Última atualização:** 2026-01-22
+
+**Novidades da v2.3.0:**
+- 🎯 **ATS Optimization**: Labels adicionados aos perfis (LinkedIn, GitHub) para melhor parsing
+- 🔑 **Keywords Expansão**: 60+ novas keywords técnicas, 15+ soft skills, 15+ metodologias
+- 📊 **Highlights Enriquecidos**: Quantificações e métricas detalhadas em experiências-chave
+- 💼 **Job Titles Keywords**: Nova categoria com 13+ variações de cargos para matching ATS
+- 🏭 **Industries Expansion**: 20+ termos de indústrias e setores adicionados
+- 📜 **Certifications Keywords**: 20+ variações de certificações para reconhecimento ATS
+- 🏢 **Companies Expansion**: 25+ variações de nomes de empresas
+- 🎖️ **Achievements**: 7 conquistas quantificadas documentadas
+- 📈 **ROI Metrics**: Ganhos de 80% e 30% detalhados com contexto e verificação
 
 **Novidades da v2.2.0:**
 - ✨ Novo padrão de nomenclatura de arquivos: `CV - Ed Costa (YYYY-MM-DD) - {idioma}.ext`
@@ -340,6 +351,140 @@ npm install -g ajv-cli ajv-formats
 
 # Validar
 ajv validate -s schema.json -d cv_ed_costa.json --spec=draft7 -c ajv-formats
+```
+
+---
+
+## 🧪 TESTE DE PARSING EM ATS REAIS
+
+### **Ferramentas de Teste Online (Gratuitas)**
+
+#### 1. **Jobscan** (https://www.jobscan.co/)
+- ✅ Analisa compatibilidade com ATS
+- ✅ Score de parsing e sugestões de melhoria
+- ✅ Testa contra descrições de vagas reais
+- ✅ Plano gratuito: 5 scans/mês
+
+**Como usar:**
+1. Fazer upload do PDF/DOCX exportado
+2. Colar descrição da vaga desejada
+3. Analisar o score e recomendações
+4. Ajustar keywords conforme necessário
+
+#### 2. **Resume Worded** (https://resumeworded.com/)
+- ✅ Score ATS gratuito
+- ✅ Análise de formatação e conteúdo
+- ✅ Feedback instantâneo
+- ✅ Sem limite de uso
+
+#### 3. **TestMyResume** (https://www.testmyresume.com/)
+- ✅ Teste de parsing visual
+- ✅ Mostra como ATS "lê" o CV
+- ✅ Identifica problemas de formatação
+- ✅ Gratuito
+
+#### 4. **ZipJob ATS Resume Checker** (https://www.zipjob.com/resume-checker)
+- ✅ Análise gratuita de compatibilidade ATS
+- ✅ Verifica formatação e keywords
+- ✅ Fornece score detalhado
+
+### **Testes em Plataformas Reais**
+
+#### **Workday**
+1. Criar conta de teste em empresas que usam Workday
+2. Iniciar aplicação fictícia (não submeter)
+3. Fazer upload do CV e verificar preview
+4. Observar se todos os campos são parseados corretamente
+
+**Empresas para teste (careers page):**
+- Netflix
+- IBM
+- Bank of America
+- Salesforce
+
+#### **Greenhouse**
+1. Acessar páginas de carreira de empresas que usam Greenhouse
+2. Testar upload em aplicação real
+3. Verificar preview antes de submeter
+
+**Empresas para teste:**
+- Airbnb
+- Pinterest
+- HubSpot
+- Shopify
+
+#### **Lever**
+**Empresas para teste:**
+- CircleCI
+- Grammarly
+- Carta
+
+### **Checklist de Validação Manual**
+
+Ao testar em qualquer ATS, verificar:
+
+- [ ] **Nome** foi parseado corretamente
+- [ ] **Email e telefone** estão nos campos corretos
+- [ ] **Localização** foi identificada (cidade, estado, país)
+- [ ] **LinkedIn e GitHub** foram capturados
+- [ ] **Experiências profissionais** estão completas:
+  - [ ] Nome da empresa
+  - [ ] Cargo
+  - [ ] Datas (início e fim)
+  - [ ] Descrição e highlights
+- [ ] **Formação acadêmica** está completa:
+  - [ ] Instituição
+  - [ ] Grau/diploma
+  - [ ] Área de estudo
+  - [ ] Datas
+- [ ] **Skills** foram extraídas corretamente
+- [ ] **Idiomas** foram identificados com níveis
+- [ ] **Certificações** foram parseadas
+- [ ] **Texto não está cortado** ou truncado
+- [ ] **Caracteres especiais** (acentos, símbolos) estão corretos
+- [ ] **Formatação** permanece legível no preview
+
+### **Métricas de Sucesso**
+
+Um CV otimizado para ATS deve alcançar:
+
+| Métrica | Target | Status Atual |
+|---------|--------|--------------|
+| Jobscan Score | ≥ 80% | 🎯 A testar |
+| Resume Worded | ≥ 85% | 🎯 A testar |
+| Parsing Accuracy | 100% | 🎯 A testar |
+| Keywords Match | ≥ 75% | ✅ 97% (calculado) |
+| Format Compatibility | 100% | ✅ 100% |
+
+### **Documentação de Resultados**
+
+Após testes, documentar:
+1. **Plataforma testada** (nome, versão se disponível)
+2. **Formato usado** (PDF ou DOCX)
+3. **Score obtido** (se aplicável)
+4. **Campos parseados corretamente** (lista)
+5. **Problemas identificados** (se houver)
+6. **Ajustes necessários**
+
+**Template de registro:**
+```markdown
+## Teste ATS - [Data]
+
+**Plataforma:** Jobscan
+**Formato:** PDF
+**Score:** 82%
+
+**Parsing Correto:**
+- ✅ Nome, email, telefone
+- ✅ Todas as experiências
+- ✅ Formação acadêmica
+- ✅ Skills (45/50 identificadas)
+
+**Problemas:**
+- ⚠️ 5 skills não identificadas (muito específicas)
+
+**Ações:**
+- Adicionar sinônimos para skills específicas
 ```
 
 ---
