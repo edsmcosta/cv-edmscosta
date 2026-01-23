@@ -7,19 +7,21 @@ Arquitetura completa para implementacao de um plugin Claude Code com agente orqu
 ## Indice
 
 1. [Visao Geral da Arquitetura](#1-visao-geral-da-arquitetura)
-2. [Agente Orquestrador](#2-agente-orquestrador)
-3. [Subagentes Especializados](#3-subagentes-especializados)
-4. [Skills e Comandos](#4-skills-e-comandos)
-5. [Componentes Auxiliares](#5-componentes-auxiliares)
-6. [Fluxos de Interacao](#6-fluxos-de-interacao)
-7. [Configuracao e Instalacao](#7-configuracao-e-instalacao)
-8. [Melhorias Propostas](#8-melhorias-propostas)
+2. [Estrategia de Modelos e Otimizacao de Custos](#2-estrategia-de-modelos-e-otimizacao-de-custos)
+3. [Arquitetura Hierarquica de Orquestracao](#3-arquitetura-hierarquica-de-orquestracao)
+4. [Agente Orquestrador Principal](#4-agente-orquestrador-principal)
+5. [Subagentes Especializados](#5-subagentes-especializados)
+6. [Skills e Comandos](#6-skills-e-comandos)
+7. [Componentes Auxiliares](#7-componentes-auxiliares)
+8. [Fluxos de Interacao](#8-fluxos-de-interacao)
+9. [Configuracao e Instalacao](#9-configuracao-e-instalacao)
+10. [Melhorias Propostas](#10-melhorias-propostas)
 
 ---
 
 ## 1. Visao Geral da Arquitetura
 
-### 1.1 Diagrama de Arquitetura
+### 1.1 Diagrama de Arquitetura Hierarquica
 
 ```mermaid
 flowchart TB
@@ -27,14 +29,21 @@ flowchart TB
         U[Chat Interface]
     end
 
-    subgraph ORCHESTRATOR ["Agente Orquestrador"]
+    subgraph LEVEL1 ["Nivel 1 - Orquestrador Principal"]
         O[CVOrchestratorAgent]
         O --> SM[State Manager]
         O --> DM[Decision Matrix]
         O --> QM[Quality Monitor]
     end
 
-    subgraph SUBAGENTS ["Subagentes Especializados"]
+    subgraph LEVEL2 ["Nivel 2 - Sub-Orquestradores de Fluxo"]
+        FO1[IngestionFlowOrchestrator]
+        FO2[AnalysisFlowOrchestrator]
+        FO3[ExportFlowOrchestrator]
+        FO4[GitFlowOrchestrator]
+    end
+
+    subgraph LEVEL3 ["Nivel 3 - Subagentes Executores"]
         SA1[IngestorAgent]
         SA2[EvaluatorAgent]
         SA3[EnricherAgent]
@@ -87,8 +96,23 @@ flowchart TB
         G3[GitHub Actions]
     end
 
+    %% Nivel 1 -> Nivel 2
     U <--> O
-    O <--> SA1 & SA2 & SA3 & SA4 & SA5 & SA6 & SA7 & SA8
+    O --> FO1 & FO2 & FO3 & FO4
+    O <--> SK8 & SK9 & SK10
+
+    %% Nivel 2 -> Nivel 3
+    FO1 --> SA1 & SA4
+    FO2 --> SA2 & SA3 & SA6
+    FO3 --> SA5 & SA7
+    FO4 --> SA8
+
+    %% Comunicacao Direta entre Agentes (linha tracejada)
+    SA1 <-.->|validacao inline| SA4
+    SA7 <-.->|traducao on-demand| SA5
+    SA2 <-.->|gaps para enriquecer| SA3
+
+    %% Skills
     SA1 <--> SK1
     SA2 <--> SK2
     SA3 <--> SK3
@@ -97,8 +121,8 @@ flowchart TB
     SA6 <--> SK6
     SA7 <--> SK7
     SA8 <--> SK11 & SK12 & SK13 & SK14
-    O <--> SK8 & SK9 & SK10
 
+    %% Tools
     SA1 --> T1
     SA4 --> T2
     SA3 --> T3
@@ -107,6 +131,7 @@ flowchart TB
     SA7 --> T7
     SA8 --> T8
 
+    %% Storage
     T1 & T2 & T3 --> DB1 & DB2
     T4 & T5 --> DB3 & DB4
     O --> DB5
@@ -186,9 +211,1149 @@ flowchart TB
 
 ---
 
-## 2. Agente Orquestrador
+## 2. Estrategia de Modelos e Otimizacao de Custos
 
-### 2.1 Definicao do Agente
+Esta secao define a estrategia de selecao de modelos para otimizar custo, velocidade e qualidade.
+
+### 2.1 Modelos Disponiveis e Caracteristicas
+
+| Modelo | Custo Relativo | Velocidade | Reasoning | Uso Recomendado |
+|--------|----------------|------------|-----------|-----------------|
+| **Haiku** | $ (baixo) | Muito rapida | Basico | Tarefas repetitivas, validacoes simples, formatacao |
+| **Sonnet** | $$ (medio) | Rapida | Avancado | Analises, geracoes de conteudo, decisoes |
+| **Opus** | $$$ (alto) | Moderada | Expert | Planejamento complexo, resolucao de problemas |
+
+### 2.2 Matriz de Roteamento Inteligente
+
+O orquestrador deve usar esta matriz para decidir qual modelo delegar:
+
+```mermaid
+flowchart TD
+    A[Tarefa Recebida] --> B{Analise de Complexidade}
+
+    B -->|"Simples/Repetitiva"| C[HAIKU]
+    B -->|"Moderada/Analitica"| D[SONNET]
+    B -->|"Complexa/Criativa"| E[OPUS]
+
+    C --> C1["Validacao de formato"]
+    C --> C2["Extracao de dados estruturados"]
+    C --> C3["Operacoes CRUD simples"]
+    C --> C4["Formatacao de saida"]
+    C --> C5["Git operations"]
+
+    D --> D1["Analise de qualidade"]
+    D --> D2["Geracao de keywords"]
+    D --> D3["Traducoes"]
+    D --> D4["Match de vagas"]
+    D --> D5["Enriquecimento"]
+
+    E --> E1["Planejamento estrategico"]
+    E --> E2["Resolucao de conflitos"]
+    E --> E3["Customizacao criativa"]
+    E --> E4["Analise de mercado"]
+    E --> E5["Tomada de decisao"]
+
+    style C fill:#90EE90
+    style D fill:#FFD700
+    style E fill:#FF6B6B
+```
+
+### 2.3 Catalogo de Componentes com Model Hints
+
+#### Legenda de Icones
+- 🟢 **Haiku** - Tarefas simples e rapidas (custo baixo)
+- 🟡 **Sonnet** - Tarefas moderadas com analise (custo medio)
+- 🔴 **Opus** - Tarefas complexas com reasoning profundo (custo alto)
+
+---
+
+### 2.4 Registro de Subagentes (Agent Registry)
+
+```yaml
+# .claude/agent-registry.yaml
+# Registro centralizado de subagentes com metadados para roteamento inteligente
+
+agents:
+
+  # ============================================================
+  # ORCHESTRATOR - Coordenador Central
+  # ============================================================
+  orchestrator:
+    name: "CVOrchestratorAgent"
+    description: |
+      Coordenador central do sistema de CV. Recebe requisicoes do usuario,
+      analisa a intencao, seleciona o subagente apropriado e gerencia o fluxo
+      completo de execucao. Mantem estado da sessao e garante qualidade.
+
+    model: "sonnet"  # Precisa de reasoning para decisoes
+    fallback_model: "opus"  # Para casos complexos
+
+    keywords:
+      triggers:
+        - "cv", "curriculo", "resume"
+        - "ajuda", "help", "status"
+        - "iniciar", "comecar", "start"
+      capabilities:
+        - "coordenacao", "orquestracao", "delegacao"
+        - "estado", "sessao", "contexto"
+        - "decisao", "roteamento", "fluxo"
+
+    responsibilities:
+      - "Interpretar intencao do usuario"
+      - "Selecionar subagente apropriado"
+      - "Gerenciar estado e contexto"
+      - "Monitorar qualidade e checkpoints"
+      - "Tratar erros e recuperacao"
+
+    routing_rules:
+      - pattern: "importar|carregar|ler arquivo"
+        delegate_to: "ingestor"
+        model_hint: "haiku"
+      - pattern: "avaliar|analisar qualidade|revisar"
+        delegate_to: "evaluator"
+        model_hint: "sonnet"
+      - pattern: "enriquecer|keywords|melhorar|ats"
+        delegate_to: "enricher"
+        model_hint: "sonnet"
+      - pattern: "validar|verificar|checar schema"
+        delegate_to: "validator"
+        model_hint: "haiku"
+      - pattern: "exportar|gerar|pdf|docx"
+        delegate_to: "exporter"
+        model_hint: "haiku"
+      - pattern: "customizar|vaga|job|posicao"
+        delegate_to: "customizer"
+        model_hint: "sonnet"
+      - pattern: "traduzir|ingles|english|portugues"
+        delegate_to: "translator"
+        model_hint: "sonnet"
+      - pattern: "commit|push|pull|branch|git"
+        delegate_to: "git"
+        model_hint: "haiku"
+
+  # ============================================================
+  # INGESTOR - Parser de Arquivos
+  # ============================================================
+  ingestor:
+    name: "IngestorAgent"
+    model: "haiku"  # 🟢 Tarefa estruturada e repetitiva
+
+    description: |
+      Especialista em importar e parsear arquivos de curriculo em diversos
+      formatos (DOCX, PDF, MD, JSON, TXT). Extrai dados estruturados e
+      normaliza para o formato JSON Resume.
+
+    keywords:
+      triggers:
+        - "importar", "carregar", "ler", "abrir"
+        - "arquivo", "documento", "file"
+        - "docx", "pdf", "markdown", "json", "txt"
+        - "parser", "extrair", "converter"
+      capabilities:
+        - "parse", "extracao", "normalizacao"
+        - "mapeamento", "conversao", "estruturacao"
+      outputs:
+        - "json_resume", "dados_estruturados"
+
+    complexity: "low"
+    typical_tokens: 500-2000
+
+    tasks:
+      simple:  # 🟢 Haiku
+        - "Ler arquivo e extrair texto"
+        - "Identificar secoes por headers"
+        - "Mapear campos para schema"
+        - "Normalizar datas e formatos"
+      complex:  # 🟡 Escalar para Sonnet se necessario
+        - "Parsear PDF com layout complexo"
+        - "Inferir estrutura de texto livre"
+        - "Resolver ambiguidades de secoes"
+
+    checkpoint: "CP-01"
+
+    example_prompts:
+      - "/cv-ingest ./meu_cv.docx"
+      - "Importar curriculo do arquivo resume.pdf"
+      - "Carregar dados do cv_backup.json"
+
+  # ============================================================
+  # EVALUATOR - Avaliador de Qualidade
+  # ============================================================
+  evaluator:
+    name: "EvaluatorAgent"
+    model: "sonnet"  # 🟡 Requer analise e julgamento
+
+    description: |
+      Especialista em avaliar qualidade e completude de curriculos.
+      Calcula scores por secao, identifica gaps e sugere melhorias
+      especificas baseadas em melhores praticas de mercado.
+
+    keywords:
+      triggers:
+        - "avaliar", "analisar", "revisar", "checar"
+        - "qualidade", "completude", "score"
+        - "gaps", "faltando", "incompleto"
+        - "sugestao", "melhoria", "recomendacao"
+      capabilities:
+        - "avaliacao", "analise", "scoring"
+        - "identificacao_gaps", "sugestoes"
+        - "comparacao", "benchmark"
+      outputs:
+        - "score", "relatorio", "sugestoes"
+
+    complexity: "medium"
+    typical_tokens: 1000-3000
+
+    tasks:
+      simple:  # 🟢 Haiku - calculos diretos
+        - "Calcular percentual de campos preenchidos"
+        - "Verificar presenca de secoes obrigatorias"
+        - "Contar itens por secao"
+      moderate:  # 🟡 Sonnet - analise qualitativa
+        - "Avaliar qualidade das descricoes"
+        - "Identificar highlights sem metricas"
+        - "Sugerir melhorias especificas"
+      complex:  # 🔴 Opus - analise profunda
+        - "Comparar com benchmarks de mercado"
+        - "Analisar progressao de carreira"
+        - "Identificar inconsistencias sutis"
+
+    checkpoint: "CP-02"
+
+    scoring_weights:
+      basics: 0.25
+      work: 0.30
+      education: 0.15
+      skills: 0.15
+      extras: 0.15
+
+  # ============================================================
+  # ENRICHER - Enriquecedor de Dados
+  # ============================================================
+  enricher:
+    name: "EnricherAgent"
+    model: "sonnet"  # 🟡 Requer analise semantica
+
+    description: |
+      Especialista em enriquecer curriculos com keywords ATS, quantificar
+      conquistas, categorizar experiencias e gerar dados otimizados para
+      sistemas de rastreamento de candidatos.
+
+    keywords:
+      triggers:
+        - "enriquecer", "keywords", "ats"
+        - "otimizar", "melhorar", "adicionar"
+        - "quantificar", "metricas", "numeros"
+        - "categorizar", "tags", "labels"
+      capabilities:
+        - "extracao_keywords", "categorizacao"
+        - "quantificacao", "enriquecimento"
+        - "otimizacao_ats"
+      outputs:
+        - "x-atsData", "keywords", "achievements"
+
+    complexity: "medium-high"
+    typical_tokens: 2000-5000
+
+    tasks:
+      moderate:  # 🟡 Sonnet
+        - "Extrair keywords tecnicas de descricoes"
+        - "Categorizar skills por tipo"
+        - "Identificar conquistas quantificaveis"
+        - "Gerar sinonimos para ATS"
+      complex:  # 🔴 Opus - quando criatividade e necessaria
+        - "Sugerir metricas para conquistas vagas"
+        - "Inferir skills implicitas"
+        - "Analisar tendencias de mercado"
+
+    checkpoint: "CP-03"
+
+    keyword_categories:
+      - primary       # Titulos de cargo alvo
+      - technical     # Tecnologias e ferramentas
+      - soft          # Competencias comportamentais
+      - methodologies # Metodologias e frameworks
+      - industries    # Setores de atuacao
+      - certifications
+      - companies
+      - jobTitles
+
+  # ============================================================
+  # VALIDATOR - Validador de Schema
+  # ============================================================
+  validator:
+    name: "ValidatorAgent"
+    model: "haiku"  # 🟢 Validacao e regras bem definidas
+
+    description: |
+      Especialista em validar curriculos contra schemas JSON e regras
+      de negocio. Executa validacoes em multiplas camadas: sintatica,
+      schema, estrutura e regras de negocio.
+
+    keywords:
+      triggers:
+        - "validar", "verificar", "checar"
+        - "schema", "formato", "estrutura"
+        - "erro", "invalido", "corrigir"
+      capabilities:
+        - "validacao_json", "validacao_schema"
+        - "validacao_estrutura", "validacao_regras"
+      outputs:
+        - "validation_report", "errors", "warnings"
+
+    complexity: "low"
+    typical_tokens: 500-1500
+
+    tasks:
+      simple:  # 🟢 Haiku - todas as tarefas
+        - "Validar JSON sintatico"
+        - "Verificar tipos de dados"
+        - "Checar campos obrigatorios"
+        - "Validar formatos (email, data, URL)"
+        - "Verificar IDs unicos"
+        - "Checar consistencia de datas"
+
+    checkpoint: "CP-06"
+
+    validation_layers:
+      - layer: "syntactic"
+        description: "JSON bem formado"
+      - layer: "schema"
+        description: "Conformidade com JSON Schema"
+      - layer: "structure"
+        description: "Secoes obrigatorias presentes"
+      - layer: "business"
+        description: "Regras de negocio"
+
+  # ============================================================
+  # EXPORTER - Gerador de Arquivos
+  # ============================================================
+  exporter:
+    name: "ExporterAgent"
+    model: "haiku"  # 🟢 Geracao de arquivos e template
+
+    description: |
+      Especialista em exportar curriculos para PDF e DOCX usando templates
+      profissionais. Aplica i18n, renderiza templates e gerencia arquivos
+      de saida com nomenclatura padronizada.
+
+    keywords:
+      triggers:
+        - "exportar", "gerar", "criar"
+        - "pdf", "docx", "word", "documento"
+        - "template", "formato", "layout"
+        - "download", "salvar", "arquivo"
+      capabilities:
+        - "geracao_pdf", "geracao_docx"
+        - "renderizacao", "template"
+        - "i18n", "localizacao"
+      outputs:
+        - "pdf_file", "docx_file"
+
+    complexity: "low"
+    typical_tokens: 500-1000
+
+    tasks:
+      simple:  # 🟢 Haiku - todas as tarefas
+        - "Selecionar template apropriado"
+        - "Aplicar traducoes i18n"
+        - "Renderizar HTML com Jinja2"
+        - "Converter para PDF/DOCX"
+        - "Gerar nome de arquivo"
+        - "Salvar no diretorio de saida"
+
+    checkpoint: "CP-07"
+
+    templates:
+      - name: "ats"
+        description: "ATS-friendly, clean layout"
+      - name: "modern"
+        description: "Visual moderno com graficos"
+
+  # ============================================================
+  # CUSTOMIZER - Adaptador para Vagas
+  # ============================================================
+  customizer:
+    name: "CustomizerAgent"
+    model: "sonnet"  # 🟡 Analise semantica e matching
+    fallback_model: "opus"  # Para customizacoes criativas
+
+    description: |
+      Especialista em adaptar curriculos para vagas especificas.
+      Analisa descricoes de vagas, calcula match score, reordena
+      experiencias por relevancia e ajusta conteudo.
+
+    keywords:
+      triggers:
+        - "customizar", "adaptar", "ajustar"
+        - "vaga", "job", "posicao", "oportunidade"
+        - "match", "fit", "relevancia"
+        - "reordenar", "priorizar", "destacar"
+      capabilities:
+        - "analise_vaga", "matching"
+        - "reordenacao", "selecao"
+        - "customizacao", "adaptacao"
+      outputs:
+        - "match_score", "cv_customizado"
+
+    complexity: "medium-high"
+    typical_tokens: 2000-4000
+
+    tasks:
+      moderate:  # 🟡 Sonnet
+        - "Extrair keywords da descricao da vaga"
+        - "Calcular match score por categoria"
+        - "Reordenar experiencias por relevancia"
+        - "Selecionar highlights relevantes"
+      complex:  # 🔴 Opus - quando criatividade e necessaria
+        - "Reescrever summary para a vaga"
+        - "Sugerir como preencher gaps"
+        - "Analisar fit cultural"
+        - "Gerar cover letter"
+
+    checkpoint: "CP-08"
+
+    matching_weights:
+      technical: 0.35
+      methodologies: 0.20
+      soft: 0.15
+      industries: 0.15
+      certifications: 0.10
+      experience_years: 0.05
+
+  # ============================================================
+  # TRANSLATOR - Tradutor de Conteudo
+  # ============================================================
+  translator:
+    name: "TranslatorAgent"
+    model: "sonnet"  # 🟡 Traducao requer entendimento semantico
+
+    description: |
+      Especialista em traduzir curriculos mantendo consistencia
+      terminologica e qualidade profissional. Preserva termos tecnicos
+      e adapta expressoes idiomaticas.
+
+    keywords:
+      triggers:
+        - "traduzir", "translate", "traducao"
+        - "ingles", "english", "portugues"
+        - "idioma", "language", "i18n"
+        - "localizar", "localization"
+      capabilities:
+        - "traducao", "localizacao"
+        - "preservacao_termos", "adaptacao"
+      outputs:
+        - "x-i18n", "translated_cv"
+
+    complexity: "medium"
+    typical_tokens: 2000-4000
+
+    tasks:
+      simple:  # 🟢 Haiku - traducoes literais
+        - "Traduzir labels e headers"
+        - "Converter formatos de data"
+        - "Mapear nomes de secoes"
+      moderate:  # 🟡 Sonnet - traducao com contexto
+        - "Traduzir descricoes mantendo tom profissional"
+        - "Adaptar expressoes idiomaticas"
+        - "Preservar termos tecnicos"
+        - "Traduzir conquistas com nuance"
+
+    checkpoint: "CP-03"
+
+    preserve_in_english:
+      - "Nomes de tecnologias"
+      - "Metodologias (Agile, Scrum)"
+      - "Certificacoes"
+      - "Nomes de empresas"
+      - "Siglas tecnicas"
+
+  # ============================================================
+  # GIT - Versionamento
+  # ============================================================
+  git:
+    name: "GitAgent"
+    model: "haiku"  # 🟢 Operacoes Git sao bem definidas
+
+    description: |
+      Especialista em gerenciar versionamento do CV usando Git.
+      Cria commits semanticos, gerencia branches, sincroniza com
+      repositorio remoto e integra com GitHub Actions.
+
+    keywords:
+      triggers:
+        - "commit", "push", "pull", "sync"
+        - "branch", "merge", "checkout"
+        - "git", "github", "versao"
+        - "salvar", "versionar", "historico"
+      capabilities:
+        - "commit", "push", "pull"
+        - "branch_management", "sync"
+        - "conflict_detection"
+      outputs:
+        - "commit_hash", "branch_status"
+
+    complexity: "low"
+    typical_tokens: 300-800
+
+    tasks:
+      simple:  # 🟢 Haiku - todas as tarefas
+        - "Detectar alteracoes (git status)"
+        - "Adicionar arquivos (git add)"
+        - "Criar commit com mensagem"
+        - "Push para remoto"
+        - "Pull do remoto"
+        - "Criar/mudar branch"
+        - "Listar branches"
+      moderate:  # 🟡 Escalar para Sonnet apenas se:
+        - "Resolver conflitos de merge"
+        - "Analisar historico complexo"
+
+    commit_types:
+      feat: "Nova experiencia, certificacao, skill"
+      fix: "Correcao de dados"
+      docs: "Documentacao"
+      style: "Formatacao"
+      refactor: "Reorganizacao"
+      chore: "Metadata, versao"
+```
+
+### 2.5 Regras de Escalonamento de Modelo
+
+```yaml
+# Regras para escalonar modelo baseado em contexto
+
+escalation_rules:
+
+  # Escalar de Haiku para Sonnet
+  haiku_to_sonnet:
+    conditions:
+      - "Tarefa requer interpretacao de texto livre"
+      - "Ambiguidade detectada na entrada"
+      - "Multiplas opcoes validas"
+      - "Erro em tentativa anterior com Haiku"
+      - "Usuario solicitou explicacao detalhada"
+
+  # Escalar de Sonnet para Opus
+  sonnet_to_opus:
+    conditions:
+      - "Tarefa requer planejamento estrategico"
+      - "Multiplas etapas interdependentes"
+      - "Criatividade necessaria (reescrita, sugestoes)"
+      - "Resolucao de conflitos complexos"
+      - "Analise de mercado ou tendencias"
+      - "Erro em tentativa anterior com Sonnet"
+
+  # Desescalar para economizar
+  sonnet_to_haiku:
+    conditions:
+      - "Tarefa e repetitiva apos primeira execucao"
+      - "Template ja definido, apenas preencher"
+      - "Validacao com regras claras"
+      - "Operacoes CRUD simples"
+```
+
+### 2.6 Estimativa de Custos por Operacao
+
+| Operacao | Modelo | Tokens (est.) | Custo Relativo |
+|----------|--------|---------------|----------------|
+| /cv-ingest | Haiku | 1,000 | $ |
+| /cv-evaluate | Sonnet | 2,000 | $$ |
+| /cv-enrich | Sonnet | 3,000 | $$ |
+| /cv-validate | Haiku | 800 | $ |
+| /cv-export | Haiku | 600 | $ |
+| /cv-customize | Sonnet/Opus | 3,500 | $$-$$$ |
+| /cv-translate | Sonnet | 2,500 | $$ |
+| /cv-commit | Haiku | 400 | $ |
+| /cv-push | Haiku | 300 | $ |
+| /cv-status | Haiku | 500 | $ |
+
+**Pipeline Completo Otimizado:**
+- Sem otimizacao (tudo Opus): $$$$$$$$$$
+- Com otimizacao inteligente: $$$$ (economia ~60%)
+
+### 2.7 Implementacao do Router Inteligente
+
+```typescript
+// .claude/router/model-router.ts
+
+interface TaskAnalysis {
+  task: string;
+  complexity: 'low' | 'medium' | 'high';
+  requires_creativity: boolean;
+  requires_reasoning: boolean;
+  is_repetitive: boolean;
+  previous_errors: number;
+}
+
+interface ModelSelection {
+  model: 'haiku' | 'sonnet' | 'opus';
+  confidence: number;
+  reason: string;
+}
+
+function selectModel(analysis: TaskAnalysis): ModelSelection {
+  // Regra 1: Tarefas simples e repetitivas -> Haiku
+  if (analysis.complexity === 'low' && !analysis.requires_creativity) {
+    return {
+      model: 'haiku',
+      confidence: 0.95,
+      reason: 'Tarefa simples e bem definida'
+    };
+  }
+
+  // Regra 2: Erros anteriores -> Escalar
+  if (analysis.previous_errors > 0) {
+    const escalated = analysis.previous_errors === 1 ? 'sonnet' : 'opus';
+    return {
+      model: escalated,
+      confidence: 0.90,
+      reason: `Escalonado devido a ${analysis.previous_errors} erro(s) anterior(es)`
+    };
+  }
+
+  // Regra 3: Criatividade necessaria -> Opus
+  if (analysis.requires_creativity && analysis.complexity === 'high') {
+    return {
+      model: 'opus',
+      confidence: 0.85,
+      reason: 'Tarefa requer criatividade e reasoning profundo'
+    };
+  }
+
+  // Regra 4: Analise moderada -> Sonnet
+  if (analysis.requires_reasoning || analysis.complexity === 'medium') {
+    return {
+      model: 'sonnet',
+      confidence: 0.90,
+      reason: 'Tarefa requer analise e julgamento'
+    };
+  }
+
+  // Default: Sonnet (balanco custo/qualidade)
+  return {
+    model: 'sonnet',
+    confidence: 0.75,
+    reason: 'Modelo padrao para tarefas nao classificadas'
+  };
+}
+```
+
+---
+
+## 3. Arquitetura Hierarquica de Orquestracao
+
+A arquitetura hierarquica de orquestracao divide a coordenacao em tres niveis, permitindo paralelizacao, especializacao por dominio e comunicacao direta entre agentes relacionados.
+
+### 3.1 Visao Geral dos Niveis
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        NIVEL 1 - ORQUESTRADOR PRINCIPAL                     │
+│                            CVOrchestratorAgent                              │
+│         (Coordenacao de alto nivel, estado global, roteamento)              │
+└─────────────────────────────────┬───────────────────────────────────────────┘
+                                  │
+        ┌─────────────────────────┼─────────────────────────┐
+        │                         │                         │
+        ▼                         ▼                         ▼
+┌───────────────────┐  ┌───────────────────┐  ┌───────────────────┐
+│ NIVEL 2 - FLUXOS  │  │ NIVEL 2 - FLUXOS  │  │ NIVEL 2 - FLUXOS  │
+│                   │  │                   │  │                   │
+│ IngestionFlow     │  │ AnalysisFlow      │  │ ExportFlow        │
+│ Orchestrator      │  │ Orchestrator      │  │ Orchestrator      │
+│ 🟢 Haiku          │  │ 🟡 Sonnet         │  │ 🟢 Haiku          │
+└────────┬──────────┘  └────────┬──────────┘  └────────┬──────────┘
+         │                      │                      │
+    ┌────┴────┐           ┌─────┼─────┐          ┌─────┴─────┐
+    │         │           │     │     │          │           │
+    ▼         ▼           ▼     ▼     ▼          ▼           ▼
+┌───────┐ ┌───────┐ ┌───────┐┌───────┐┌───────┐┌───────┐ ┌───────┐
+│Ingest │ │Valid  │ │Eval   ││Enrich ││Custom ││Export │ │Transl │
+│Agent  │◄┼►Agent │ │Agent  ││Agent  ││Agent  ││Agent  │◄┼►Agent │
+│🟢     │ │🟢     │ │🟡     ││🟡     ││🟡/🔴  ││🟢     │ │🟡     │
+└───────┘ └───────┘ └───────┘└───┬───┘└───────┘└───────┘ └───────┘
+    ◄─────────────────────────────┼───── Comunicacao Direta ──────►
+                                  │
+                            ┌─────┴─────┐
+                            │ GitFlow   │
+                            │ Orchestr. │
+                            │ 🟢 Haiku  │
+                            └─────┬─────┘
+                                  │
+                            ┌─────┴─────┐
+                            │ GitAgent  │
+                            │ 🟢        │
+                            └───────────┘
+```
+
+### 3.2 Sub-Orquestradores de Fluxo
+
+```yaml
+# .claude/agents/flow-orchestrators.yaml
+# Definicao dos sub-orquestradores de fluxo (Nivel 2)
+
+flow_orchestrators:
+
+  # ============================================================
+  # INGESTION FLOW - Fluxo de Importacao
+  # ============================================================
+  ingestion:
+    name: "IngestionFlowOrchestrator"
+    model: "haiku"  # 🟢 Coordenacao de tarefas estruturadas
+
+    description: |
+      Coordena o fluxo completo de importacao de curriculos.
+      Gerencia a sequencia: parsing -> validacao -> normalizacao.
+      Permite execucao paralela de validacoes independentes.
+
+    keywords:
+      triggers:
+        - "importar", "carregar", "ingerir"
+        - "arquivo", "documento", "upload"
+      domain: "ingestion"
+
+    managed_agents:
+      - agent: "IngestorAgent"
+        role: "executor_principal"
+        model: "haiku"
+      - agent: "ValidatorAgent"
+        role: "validador"
+        model: "haiku"
+
+    direct_communication:
+      - from: "IngestorAgent"
+        to: "ValidatorAgent"
+        type: "sync"
+        purpose: "Validacao inline durante parsing"
+        trigger: "Ao completar parsing de cada secao"
+
+    parallel_tasks:
+      - "Validar schema JSON"
+      - "Verificar campos obrigatorios"
+      - "Validar formatos (email, URL, data)"
+
+    sequential_tasks:
+      - "Ler arquivo de entrada"
+      - "Parsear estrutura"
+      - "Normalizar dados"
+      - "Gerar JSON final"
+
+    checkpoints: ["CP-01", "CP-06"]
+
+    flow_diagram: |
+      IngestorAgent ──parse──► ValidatorAgent ──validate──► Resultado
+                        │              ▲
+                        └──feedback────┘
+
+  # ============================================================
+  # ANALYSIS FLOW - Fluxo de Analise
+  # ============================================================
+  analysis:
+    name: "AnalysisFlowOrchestrator"
+    model: "sonnet"  # 🟡 Coordenacao requer decisoes de qualidade
+    fallback_model: "opus"  # Para analises complexas
+
+    description: |
+      Coordena analise completa do curriculo: avaliacao de qualidade,
+      identificacao de gaps, enriquecimento com keywords e customizacao
+      para vagas. Permite paralelizacao de analises independentes.
+
+    keywords:
+      triggers:
+        - "analisar", "avaliar", "melhorar"
+        - "enriquecer", "customizar", "otimizar"
+      domain: "analysis"
+
+    managed_agents:
+      - agent: "EvaluatorAgent"
+        role: "avaliador"
+        model: "sonnet"
+      - agent: "EnricherAgent"
+        role: "enriquecedor"
+        model: "sonnet"
+      - agent: "CustomizerAgent"
+        role: "customizador"
+        model: "sonnet/opus"
+
+    direct_communication:
+      - from: "EvaluatorAgent"
+        to: "EnricherAgent"
+        type: "async"
+        purpose: "Enviar gaps identificados para enriquecimento"
+        trigger: "Ao identificar secoes fracas ou incompletas"
+      - from: "EnricherAgent"
+        to: "CustomizerAgent"
+        type: "sync"
+        purpose: "Fornecer keywords enriquecidas para matching"
+        trigger: "Quando customizacao para vaga e solicitada"
+
+    parallel_tasks:
+      - "Avaliar qualidade por secao"
+      - "Identificar gaps de keywords"
+      - "Analisar compatibilidade ATS"
+
+    sequential_tasks:
+      - "Receber CV normalizado"
+      - "Executar avaliacao inicial"
+      - "Enriquecer baseado em gaps"
+      - "Customizar se vaga fornecida"
+
+    checkpoints: ["CP-02", "CP-03", "CP-08"]
+
+    escalation_rules:
+      - condition: "Analise de fit cultural"
+        escalate_to: "opus"
+      - condition: "Reescrita criativa de summary"
+        escalate_to: "opus"
+
+  # ============================================================
+  # EXPORT FLOW - Fluxo de Exportacao
+  # ============================================================
+  export:
+    name: "ExportFlowOrchestrator"
+    model: "haiku"  # 🟢 Coordenacao de tarefas de template
+
+    description: |
+      Coordena exportacao do curriculo para formatos finais (PDF, DOCX).
+      Gerencia traducao on-demand e aplicacao de templates.
+      Permite geracao paralela de multiplos formatos/idiomas.
+
+    keywords:
+      triggers:
+        - "exportar", "gerar", "criar"
+        - "pdf", "docx", "documento"
+      domain: "export"
+
+    managed_agents:
+      - agent: "TranslatorAgent"
+        role: "tradutor"
+        model: "sonnet"
+      - agent: "ExporterAgent"
+        role: "gerador"
+        model: "haiku"
+
+    direct_communication:
+      - from: "ExporterAgent"
+        to: "TranslatorAgent"
+        type: "sync"
+        purpose: "Solicitar traducao on-demand durante export"
+        trigger: "Quando idioma de saida != idioma base"
+
+    parallel_tasks:
+      - "Gerar PDF pt-BR"
+      - "Gerar PDF en-US"
+      - "Gerar DOCX pt-BR"
+      - "Gerar DOCX en-US"
+
+    sequential_tasks:
+      - "Aplicar traducao (se necessario)"
+      - "Selecionar template"
+      - "Renderizar HTML"
+      - "Converter para formato final"
+      - "Salvar arquivo"
+
+    checkpoints: ["CP-07"]
+
+  # ============================================================
+  # GIT FLOW - Fluxo de Versionamento
+  # ============================================================
+  git:
+    name: "GitFlowOrchestrator"
+    model: "haiku"  # 🟢 Operacoes Git sao bem definidas
+
+    description: |
+      Coordena operacoes de versionamento Git. Gerencia commits,
+      pushes, branches e sincronizacao com repositorio remoto.
+      Integra com hooks de validacao.
+
+    keywords:
+      triggers:
+        - "commit", "push", "pull"
+        - "branch", "versionar", "git"
+      domain: "git"
+
+    managed_agents:
+      - agent: "GitAgent"
+        role: "executor"
+        model: "haiku"
+      - agent: "ValidatorAgent"
+        role: "pre_commit_validator"
+        model: "haiku"
+
+    direct_communication:
+      - from: "GitAgent"
+        to: "ValidatorAgent"
+        type: "sync"
+        purpose: "Validar CV antes de commit"
+        trigger: "Hook pre-commit"
+
+    parallel_tasks:
+      - "Verificar status"
+      - "Listar branches"
+
+    sequential_tasks:
+      - "Validar alteracoes"
+      - "Staged changes"
+      - "Criar commit"
+      - "Push para remoto"
+
+    checkpoints: ["CP-06"]
+```
+
+### 3.3 Regras de Comunicacao Direta entre Agentes
+
+```yaml
+# .claude/config/agent-communication.yaml
+# Regras de comunicacao direta (Nivel 3)
+
+direct_communication_rules:
+
+  # ============================================================
+  # PARES DE COMUNICACAO PERMITIDOS
+  # ============================================================
+  allowed_pairs:
+
+    # --- Ingestion Flow ---
+    - pair: ["IngestorAgent", "ValidatorAgent"]
+      direction: "bidirectional"
+      model_hint: "haiku"  # Ambos usam Haiku
+      protocols:
+        - name: "inline_validation"
+          description: "Validar cada secao durante parsing"
+          trigger: "section_parsed"
+          response_type: "sync"
+          timeout_ms: 5000
+
+        - name: "schema_check"
+          description: "Verificar conformidade com schema"
+          trigger: "document_complete"
+          response_type: "sync"
+          timeout_ms: 10000
+
+        - name: "error_feedback"
+          description: "Retornar erros para correcao"
+          trigger: "validation_failed"
+          response_type: "sync"
+          timeout_ms: 3000
+
+    # --- Analysis Flow ---
+    - pair: ["EvaluatorAgent", "EnricherAgent"]
+      direction: "evaluator_to_enricher"
+      model_hint: "sonnet"
+      protocols:
+        - name: "gap_notification"
+          description: "Notificar gaps encontrados para enriquecimento"
+          trigger: "gap_identified"
+          response_type: "async"
+
+        - name: "enrichment_request"
+          description: "Solicitar keywords para secao especifica"
+          trigger: "weak_section_found"
+          response_type: "sync"
+          timeout_ms: 15000
+
+    # --- Export Flow ---
+    - pair: ["ExporterAgent", "TranslatorAgent"]
+      direction: "exporter_to_translator"
+      model_hint: "mixed"  # Exporter=Haiku, Translator=Sonnet
+      protocols:
+        - name: "translate_on_demand"
+          description: "Traduzir secao durante exportacao"
+          trigger: "export_started && target_lang != source_lang"
+          response_type: "sync"
+          timeout_ms: 20000
+
+        - name: "batch_translate"
+          description: "Traduzir documento completo"
+          trigger: "full_export_requested"
+          response_type: "async"
+
+    # --- Cross-Flow ---
+    - pair: ["EnricherAgent", "CustomizerAgent"]
+      direction: "enricher_to_customizer"
+      model_hint: "sonnet"
+      protocols:
+        - name: "keywords_handoff"
+          description: "Passar keywords enriquecidas para customizacao"
+          trigger: "customization_requested"
+          response_type: "sync"
+          timeout_ms: 10000
+
+  # ============================================================
+  # COMUNICACAO PROIBIDA (deve passar pelo orquestrador)
+  # ============================================================
+  forbidden_pairs:
+    - pair: ["IngestorAgent", "ExporterAgent"]
+      reason: "Fluxos diferentes, requer coordenacao de estado"
+
+    - pair: ["GitAgent", "EnricherAgent"]
+      reason: "Dominios nao relacionados"
+
+    - pair: ["CustomizerAgent", "GitAgent"]
+      reason: "Customizacao nao deve triggerar commits automaticos"
+
+  # ============================================================
+  # FORMATO DE MENSAGEM ENTRE AGENTES
+  # ============================================================
+  message_format:
+    schema:
+      from_agent: "string"
+      to_agent: "string"
+      protocol: "string"
+      correlation_id: "uuid"
+      timestamp: "iso8601"
+      payload: "object"
+      response_required: "boolean"
+      timeout_ms: "number"
+
+    example: |
+      {
+        "from_agent": "EvaluatorAgent",
+        "to_agent": "EnricherAgent",
+        "protocol": "gap_notification",
+        "correlation_id": "abc-123-def",
+        "timestamp": "2026-01-23T10:30:00Z",
+        "payload": {
+          "section": "work",
+          "item_id": "work-001",
+          "gaps": ["missing_metrics", "weak_keywords"],
+          "priority": "high"
+        },
+        "response_required": false
+      }
+```
+
+### 3.4 Diagrama de Fluxo de Comunicacao
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant O as CVOrchestrator
+    participant IFO as IngestionFlow
+    participant AFO as AnalysisFlow
+    participant EFO as ExportFlow
+    participant I as IngestorAgent
+    participant V as ValidatorAgent
+    participant E as EvaluatorAgent
+    participant EN as EnricherAgent
+    participant EX as ExporterAgent
+    participant T as TranslatorAgent
+
+    U->>O: /cv-ingest arquivo.docx
+    O->>IFO: Delegar fluxo de ingestao
+
+    rect rgb(200, 230, 200)
+        Note over IFO,V: Nivel 2 - Coordenacao de Fluxo
+        IFO->>I: Iniciar parsing
+        I->>V: [DIRETO] Validar secao basics
+        V-->>I: [DIRETO] OK
+        I->>V: [DIRETO] Validar secao work
+        V-->>I: [DIRETO] OK
+        I-->>IFO: Parsing completo
+        IFO->>V: Validacao final
+        V-->>IFO: Validado
+    end
+
+    IFO-->>O: CV importado (checkpoint CP-01)
+    O-->>U: CV importado com sucesso!
+
+    U->>O: /cv-evaluate
+    O->>AFO: Delegar fluxo de analise
+
+    rect rgb(230, 230, 200)
+        Note over AFO,EN: Nivel 2 - Coordenacao de Fluxo
+        AFO->>E: Avaliar qualidade
+        E->>EN: [DIRETO] Gaps encontrados: keywords
+        EN-->>E: [DIRETO] Sugestoes de keywords
+        E-->>AFO: Avaliacao completa
+    end
+
+    AFO-->>O: Analise concluida (checkpoint CP-02)
+    O-->>U: Relatorio de qualidade
+
+    U->>O: /cv-export pdf en-US
+    O->>EFO: Delegar fluxo de exportacao
+
+    rect rgb(200, 220, 240)
+        Note over EFO,T: Nivel 2 - Coordenacao de Fluxo
+        EFO->>T: Traduzir para en-US
+        T-->>EFO: Traducao pronta
+        EFO->>EX: Gerar PDF
+        EX->>T: [DIRETO] Traduzir campo especifico
+        T-->>EX: [DIRETO] Campo traduzido
+        EX-->>EFO: PDF gerado
+    end
+
+    EFO-->>O: Exportacao concluida (checkpoint CP-07)
+    O-->>U: Arquivo: CV - Nome (2026-01-23) - en-US.pdf
+```
+
+### 3.5 Beneficios da Arquitetura Hierarquica
+
+| Aspecto | Arquitetura Flat | Arquitetura Hierarquica |
+|---------|------------------|-------------------------|
+| **Paralelizacao** | Limitada (orquestrador centralizado) | Alta (sub-orquestradores independentes) |
+| **Latencia** | Alta (todos os requests via orquestrador) | Baixa (comunicacao direta quando apropriada) |
+| **Escalabilidade** | Gargalo no orquestrador | Distribuida por dominios |
+| **Complexidade** | Simples mas limitada | Maior, porem mais flexivel |
+| **Custo** | Orquestrador sempre Sonnet | Sub-orquestradores podem ser Haiku |
+| **Debug** | Facil (fluxo linear) | Moderado (multiplos niveis) |
+| **Resiliencia** | Single point of failure | Falhas isoladas por fluxo |
+
+### 3.6 Configuracao de Paralelizacao
+
+```yaml
+# .claude/config/parallelization.yaml
+
+parallelization:
+
+  # Tarefas que podem executar em paralelo
+  parallel_safe:
+    ingestion_flow:
+      - "validate_email_format"
+      - "validate_url_format"
+      - "validate_date_format"
+      - "check_required_fields"
+
+    analysis_flow:
+      - "evaluate_basics_section"
+      - "evaluate_work_section"
+      - "evaluate_education_section"
+      - "evaluate_skills_section"
+
+    export_flow:
+      - "generate_pdf_ptbr"
+      - "generate_pdf_enus"
+      - "generate_docx_ptbr"
+      - "generate_docx_enus"
+
+  # Tarefas que devem ser sequenciais
+  sequential_required:
+    ingestion_flow:
+      - "read_file"
+      - "parse_structure"
+      - "normalize_data"
+      - "generate_output"
+
+    git_flow:
+      - "validate_changes"
+      - "stage_files"
+      - "create_commit"
+      - "push_remote"
+
+  # Limites de concorrencia
+  concurrency_limits:
+    max_parallel_agents: 4
+    max_parallel_tasks_per_flow: 3
+    max_direct_communications: 2
+```
+
+---
+
+## 4. Agente Orquestrador Principal
+
+### 4.1 Definicao do Agente
 
 ```markdown
 <!-- .claude/agents/orchestrator.md -->
@@ -283,9 +1448,9 @@ Monitore continuamente:
 - Keyword density
 ```
 
-### 2.2 Componentes do Orquestrador
+### 4.2 Componentes do Orquestrador
 
-#### 2.2.1 State Manager
+#### 4.2.1 State Manager
 
 ```typescript
 // Estrutura de estado gerenciado pelo orquestrador
@@ -332,7 +1497,7 @@ interface CVOrchestratorState {
 }
 ```
 
-#### 2.2.2 Decision Matrix
+#### 4.2.2 Decision Matrix
 
 ```mermaid
 flowchart TD
@@ -365,7 +1530,7 @@ flowchart TD
     F --> H[Reportar Erro + Sugestao]
 ```
 
-#### 2.2.3 Quality Monitor
+#### 4.2.3 Quality Monitor
 
 ```markdown
 ## Quality Monitor
@@ -433,14 +1598,53 @@ translation_coverage = (translated_fields / translatable_fields) * 100
 
 ---
 
-## 3. Subagentes Especializados
+## 5. Subagentes Especializados
 
-### 3.1 IngestorAgent
+> **Resumo de Modelos por Subagente**
+>
+> | Subagente | Modelo | Custo | Justificativa |
+> |-----------|--------|-------|---------------|
+> | IngestorAgent | 🟢 Haiku | $ | Parsing estruturado, regras claras |
+> | EvaluatorAgent | 🟡 Sonnet | $$ | Analise qualitativa, julgamento |
+> | EnricherAgent | 🟡 Sonnet | $$ | Semantica, extracao inteligente |
+> | ValidatorAgent | 🟢 Haiku | $ | Regras de validacao bem definidas |
+> | ExporterAgent | 🟢 Haiku | $ | Template filling, formatacao |
+> | CustomizerAgent | 🟡 Sonnet/🔴 Opus | $$-$$$ | Matching semantico, criatividade |
+> | TranslatorAgent | 🟡 Sonnet | $$ | Traducao com contexto profissional |
+> | GitAgent | 🟢 Haiku | $ | Operacoes Git bem definidas |
+
+### 5.1 IngestorAgent
 
 ```markdown
 <!-- .claude/agents/ingestor.md -->
+---
+name: ingestor
+model: haiku
+color: green
+description: |
+  Parser de arquivos de curriculo. Tarefas estruturadas e repetitivas.
+  Use Haiku para custo minimo. Escale para Sonnet se encontrar ambiguidades.
+keywords:
+  - importar, carregar, ler, abrir
+  - arquivo, documento, pdf, docx, json, markdown
+  - parser, extrair, converter, normalizar
+triggers:
+  - "/cv-ingest"
+  - "importar curriculo"
+  - "carregar arquivo"
+complexity: low
+typical_tokens: 500-2000
+---
 
 # Ingestor Agent
+
+## Modelo Recomendado
+🟢 **Haiku** - Tarefa estruturada com regras claras de parsing
+
+## Quando Escalar para Sonnet
+- PDF com layout complexo que Haiku nao consegue parsear
+- Texto livre sem estrutura clara
+- Ambiguidades que requerem interpretacao
 
 ## Identidade
 Voce e o IngestorAgent, especialista em importar e parsear arquivos de
@@ -504,12 +1708,38 @@ Quando encontrar ambiguidades:
 3. Solicitar confirmacao do usuario se necessario
 ```
 
-### 3.2 EvaluatorAgent
+### 5.2 EvaluatorAgent
 
 ```markdown
 <!-- .claude/agents/evaluator.md -->
+---
+name: evaluator
+model: sonnet
+color: yellow
+description: |
+  Avaliador de qualidade de CVs. Requer julgamento e analise qualitativa.
+  Sonnet oferece bom balanco entre custo e capacidade analitica.
+keywords:
+  - avaliar, analisar, revisar, checar
+  - qualidade, completude, score, gaps
+  - sugestao, melhoria, recomendacao
+triggers:
+  - "/cv-evaluate"
+  - "avaliar curriculo"
+  - "analisar qualidade"
+complexity: medium
+typical_tokens: 1000-3000
+---
 
 # Evaluator Agent
+
+## Modelo Recomendado
+🟡 **Sonnet** - Analise qualitativa requer reasoning moderado
+
+## Tarefas por Modelo
+- 🟢 **Haiku**: Calculos de score, contagem de campos (pode delegar)
+- 🟡 **Sonnet**: Avaliacao qualitativa, sugestoes de melhoria
+- 🔴 **Opus**: Analise de progressao de carreira, comparacao com mercado
 
 ## Identidade
 Voce e o EvaluatorAgent, especialista em avaliar a qualidade e completude
@@ -571,12 +1801,37 @@ de curriculos, identificando gaps e sugerindo melhorias.
 - Datas inconsistentes: error
 ```
 
-### 3.3 EnricherAgent
+### 5.3 EnricherAgent
 
 ```markdown
 <!-- .claude/agents/enricher.md -->
+---
+name: enricher
+model: sonnet
+color: yellow
+description: |
+  Enriquecedor de CVs com keywords ATS e metricas. Requer analise semantica
+  para extrair keywords relevantes e quantificar conquistas.
+keywords:
+  - enriquecer, keywords, ats, otimizar
+  - quantificar, metricas, numeros
+  - categorizar, tags, labels
+triggers:
+  - "/cv-enrich"
+  - "adicionar keywords"
+  - "otimizar para ats"
+complexity: medium-high
+typical_tokens: 2000-5000
+---
 
 # Enricher Agent
+
+## Modelo Recomendado
+🟡 **Sonnet** - Extracao semantica de keywords requer entendimento de contexto
+
+## Tarefas por Modelo
+- 🟡 **Sonnet**: Extracao de keywords, categorizacao, quantificacao
+- 🔴 **Opus**: Sugerir metricas para conquistas vagas, analise de mercado
 
 ## Identidade
 Voce e o EnricherAgent, especialista em enriquecer curriculos com keywords,
@@ -650,12 +1905,41 @@ Padroes reconhecidos:
 ```
 ```
 
-### 3.4 ValidatorAgent
+### 5.4 ValidatorAgent
 
 ```markdown
 <!-- .claude/agents/validator.md -->
+---
+name: validator
+model: haiku
+color: green
+description: |
+  Validador de schema e regras. Tarefas com regras bem definidas.
+  Haiku e suficiente para validacoes deterministicas.
+keywords:
+  - validar, verificar, checar
+  - schema, formato, estrutura
+  - erro, invalido, corrigir
+triggers:
+  - "/cv-validate"
+  - "validar curriculo"
+  - "checar schema"
+complexity: low
+typical_tokens: 500-1500
+---
 
 # Validator Agent
+
+## Modelo Recomendado
+🟢 **Haiku** - Validacao com regras bem definidas, sem ambiguidade
+
+## Todas as tarefas usam Haiku
+- Validar JSON sintatico
+- Verificar tipos de dados
+- Checar campos obrigatorios
+- Validar formatos (email, data, URL)
+- Verificar IDs unicos
+- Checar consistencia de datas
 
 ## Identidade
 Voce e o ValidatorAgent, especialista em validar curriculos contra
@@ -718,12 +2002,41 @@ schemas e regras de negocio, garantindo integridade dos dados.
 ```
 ```
 
-### 3.5 ExporterAgent
+### 5.5 ExporterAgent
 
 ```markdown
 <!-- .claude/agents/exporter.md -->
+---
+name: exporter
+model: haiku
+color: green
+description: |
+  Gerador de arquivos PDF/DOCX. Template filling e formatacao.
+  Tarefas bem definidas, Haiku e ideal.
+keywords:
+  - exportar, gerar, criar
+  - pdf, docx, word, documento
+  - template, formato, layout
+triggers:
+  - "/cv-export"
+  - "exportar pdf"
+  - "gerar documento"
+complexity: low
+typical_tokens: 500-1000
+---
 
 # Exporter Agent
+
+## Modelo Recomendado
+🟢 **Haiku** - Geracao de arquivos com templates, sem criatividade necessaria
+
+## Todas as tarefas usam Haiku
+- Selecionar template apropriado
+- Aplicar traducoes i18n
+- Renderizar HTML com Jinja2
+- Converter para PDF/DOCX
+- Gerar nome de arquivo
+- Salvar no diretorio de saida
 
 ## Identidade
 Voce e o ExporterAgent, especialista em exportar curriculos para
@@ -785,12 +2098,39 @@ Se arquivo existe, adicionar sufixo:
 ```
 ```
 
-### 3.6 CustomizerAgent
+### 5.6 CustomizerAgent
 
 ```markdown
 <!-- .claude/agents/customizer.md -->
+---
+name: customizer
+model: sonnet
+fallback_model: opus
+color: yellow
+description: |
+  Adaptador de CV para vagas. Matching semantico e reordenacao inteligente.
+  Use Sonnet para matching, Opus para reescrita criativa de summary.
+keywords:
+  - customizar, adaptar, ajustar
+  - vaga, job, posicao, oportunidade
+  - match, fit, relevancia
+triggers:
+  - "/cv-customize"
+  - "customizar para vaga"
+  - "adaptar curriculo"
+complexity: medium-high
+typical_tokens: 2000-4000
+---
 
 # Customizer Agent
+
+## Modelo Recomendado
+🟡 **Sonnet** - Matching semantico e selecao de conteudo
+🔴 **Opus** - Reescrita criativa de summary, analise de fit cultural
+
+## Tarefas por Modelo
+- 🟡 **Sonnet**: Extrair keywords da vaga, calcular match, reordenar
+- 🔴 **Opus**: Reescrever summary, sugerir como preencher gaps, cover letter
 
 ## Identidade
 Voce e o CustomizerAgent, especialista em adaptar curriculos para
@@ -860,12 +2200,37 @@ vagas especificas, otimizando match de keywords e relevancia.
 ```
 ```
 
-### 3.7 TranslatorAgent
+### 5.7 TranslatorAgent
 
 ```markdown
 <!-- .claude/agents/translator.md -->
+---
+name: translator
+model: sonnet
+color: yellow
+description: |
+  Tradutor de CVs com preservacao de termos tecnicos.
+  Sonnet oferece traducao de qualidade com entendimento de contexto.
+keywords:
+  - traduzir, translate, traducao
+  - ingles, english, portugues
+  - idioma, language, i18n
+triggers:
+  - "/cv-translate"
+  - "traduzir para ingles"
+  - "traduzir curriculo"
+complexity: medium
+typical_tokens: 2000-4000
+---
 
 # Translator Agent
+
+## Modelo Recomendado
+🟡 **Sonnet** - Traducao com preservacao de contexto profissional
+
+## Tarefas por Modelo
+- 🟢 **Haiku**: Traducao de labels simples, headers, formatos de data
+- 🟡 **Sonnet**: Traducao de descricoes, conquistas, adaptacao de expressoes
 
 ## Identidade
 Voce e o TranslatorAgent, especialista em traduzir curriculos
@@ -929,7 +2294,7 @@ mantendo consistencia terminologica e qualidade profissional.
 ```
 ```
 
-### 3.8 GitAgent
+### 5.8 GitAgent
 
 ```markdown
 <!-- .claude/agents/git.md -->
@@ -1111,9 +2476,9 @@ sequenceDiagram
 
 ---
 
-## 4. Skills e Comandos
+## 6. Skills e Comandos
 
-### 4.1 Tabela de Skills
+### 6.1 Tabela de Skills
 
 | Skill | Comando | Descricao | Subagente |
 |-------|---------|-----------|-----------|
@@ -1133,7 +2498,7 @@ sequenceDiagram
 | cv-rollback | `/cv-rollback [versao]` | Reverte para versao | Orchestrator |
 | cv-help | `/cv-help [comando]` | Ajuda sobre comandos | Orchestrator |
 
-### 4.2 Definicoes das Skills
+### 6.2 Definicoes das Skills
 
 #### /cv-ingest
 
@@ -1624,9 +2989,9 @@ scores de qualidade e historico recente.
 
 ---
 
-## 5. Componentes Auxiliares
+## 7. Componentes Auxiliares
 
-### 5.1 MCP Server - CV Tools
+### 7.1 MCP Server - CV Tools
 
 ```typescript
 // .claude/mcp/cv-tools-server/src/index.ts
@@ -1697,7 +3062,7 @@ const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
 
-### 5.2 Definicao das Ferramentas MCP
+### 7.2 Definicao das Ferramentas MCP
 
 ```typescript
 // .claude/mcp/cv-tools-server/src/tools/keyword-extractor.ts
@@ -1862,7 +3227,7 @@ async function executeGitCommand(command: string): Promise<{ content: Array<{ ty
 }
 ```
 
-### 5.3 Hooks de Automacao
+### 7.3 Hooks de Automacao
 
 ```bash
 # .claude/hooks/pre-commit.sh
@@ -2025,7 +3390,7 @@ if [[ $CHANGES == *"insertion"* ]]; then
 fi
 ```
 
-### 5.4 Configuracao Local
+### 7.4 Configuracao Local
 
 ```json
 // .claude/settings.local.json
@@ -2100,9 +3465,9 @@ fi
 
 ---
 
-## 6. Fluxos de Interacao
+## 8. Fluxos de Interacao
 
-### 6.1 Fluxo Completo: Novo CV
+### 8.1 Fluxo Completo: Novo CV
 
 ```mermaid
 sequenceDiagram
@@ -2148,7 +3513,7 @@ sequenceDiagram
     O-->>U: 4 arquivos gerados
 ```
 
-### 6.2 Fluxo: Customizacao para Vaga
+### 8.2 Fluxo: Customizacao para Vaga
 
 ```mermaid
 sequenceDiagram
@@ -2181,7 +3546,7 @@ sequenceDiagram
     O-->>U: CV customizado exportado
 ```
 
-### 6.3 Fluxo: Versionamento com Git
+### 7.3 Fluxo: Versionamento com Git
 
 ```mermaid
 sequenceDiagram
@@ -2266,7 +3631,7 @@ sequenceDiagram
     Note over U,GH: CV original preservado!
 ```
 
-### 6.4 Fluxo: Tratamento de Erro
+### 7.4 Fluxo: Tratamento de Erro
 
 ```mermaid
 sequenceDiagram
@@ -2297,9 +3662,9 @@ sequenceDiagram
 
 ---
 
-## 7. Configuracao e Instalacao
+## 9. Configuracao e Instalacao
 
-### 7.1 Pre-requisitos
+### 8.1 Pre-requisitos
 
 ```yaml
 Sistema:
@@ -2318,7 +3683,7 @@ Dependencias Node:
   - typescript
 ```
 
-### 7.2 Passos de Instalacao
+### 8.2 Passos de Instalacao
 
 ```bash
 # 1. Clonar/criar estrutura de diretorios
@@ -2349,7 +3714,7 @@ chmod +x .claude/hooks/*.sh
 claude /cv-status
 ```
 
-### 7.3 Verificacao de Instalacao
+### 8.3 Verificacao de Instalacao
 
 ```bash
 # Verificar agentes carregados
@@ -2367,9 +3732,9 @@ claude "/cv-help"
 
 ---
 
-## 8. Melhorias Propostas
+## 10. Melhorias Propostas
 
-### 8.1 Novos Componentes
+### 9.1 Novos Componentes
 
 #### 8.1.1 HistoryManager (Novo)
 
@@ -2449,7 +3814,7 @@ claude "/cv-help"
 - `/cv-metrics` - Exibir dashboard de metricas
 ```
 
-### 8.2 Melhorias nos Subagentes
+### 9.2 Melhorias nos Subagentes
 
 #### 8.2.1 EnricherAgent Aprimorado
 
@@ -2491,7 +3856,7 @@ Sugestao: 'Melhoria de 30% no tempo de processamento'"
 - Simular score em ATS conhecidos
 ```
 
-### 8.3 Novas Skills
+### 9.3 Novas Skills
 
 #### /cv-analyze-market
 
@@ -2549,7 +3914,7 @@ e sincroniza com o CV.
 - Configuracao de API LinkedIn
 ```
 
-### 8.4 Integracao com APIs Externas
+### 9.4 Integracao com APIs Externas
 
 #### 8.4.1 LinkedIn API
 
@@ -2586,7 +3951,7 @@ Capacidades:
   - Alertar sobre vagas compativeis
 ```
 
-### 8.5 Interface Web (Futuro)
+### 9.5 Interface Web (Futuro)
 
 **Justificativa:** Permitir edicao visual do CV alem do chat.
 
