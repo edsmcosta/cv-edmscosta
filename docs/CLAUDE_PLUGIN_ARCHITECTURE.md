@@ -41,6 +41,7 @@ flowchart TB
         FO2[AnalysisFlowOrchestrator]
         FO3[ExportFlowOrchestrator]
         FO4[GitFlowOrchestrator]
+        FO5[EditFlowOrchestrator]
     end
 
     subgraph LEVEL3 ["Nivel 3 - Subagentes Executores"]
@@ -52,6 +53,7 @@ flowchart TB
         SA6[CustomizerAgent]
         SA7[TranslatorAgent]
         SA8[GitAgent]
+        SA9[EditorAgent]
     end
 
     subgraph SKILLS ["Skills"]
@@ -69,6 +71,11 @@ flowchart TB
         SK12[/cv-push]
         SK13[/cv-sync]
         SK14[/cv-branch]
+        SK15[/cv-add]
+        SK16[/cv-edit]
+        SK17[/cv-remove]
+        SK18[/cv-reorder]
+        SK19[/cv-list]
     end
 
     subgraph TOOLS ["Ferramentas MCP"]
@@ -98,7 +105,7 @@ flowchart TB
 
     %% Nivel 1 -> Nivel 2
     U <--> O
-    O --> FO1 & FO2 & FO3 & FO4
+    O --> FO1 & FO2 & FO3 & FO4 & FO5
     O <--> SK8 & SK9 & SK10
 
     %% Nivel 2 -> Nivel 3
@@ -106,11 +113,14 @@ flowchart TB
     FO2 --> SA2 & SA3 & SA6
     FO3 --> SA5 & SA7
     FO4 --> SA8
+    FO5 --> SA9 & SA4 & SA7
 
     %% Comunicacao Direta entre Agentes (linha tracejada)
     SA1 <-.->|validacao inline| SA4
     SA7 <-.->|traducao on-demand| SA5
     SA2 <-.->|gaps para enriquecer| SA3
+    SA9 <-.->|validacao campos| SA4
+    SA9 <-.->|auto-traducao| SA7
 
     %% Skills
     SA1 <--> SK1
@@ -120,6 +130,7 @@ flowchart TB
     SA5 <--> SK5
     SA6 <--> SK6
     SA7 <--> SK7
+    SA9 <--> SK15 & SK16 & SK17 & SK18 & SK19
     SA8 <--> SK11 & SK12 & SK13 & SK14
 
     %% Tools
@@ -716,6 +727,288 @@ agents:
       style: "Formatacao"
       refactor: "Reorganizacao"
       chore: "Metadata, versao"
+
+  # ============================================================
+  # EDITOR - Gerenciador de Dados do CV
+  # ============================================================
+  editor:
+    name: "EditorAgent"
+    model: "sonnet"  # 🟡 Requer entendimento de contexto para edicoes
+    fallback_model: "haiku"  # Para operacoes simples de CRUD
+
+    description: |
+      Especialista em gerenciar operacoes CRUD (Create, Read, Update, Delete)
+      em todas as secoes do curriculo. Valida dados em tempo real, sugere
+      preenchimentos baseados em contexto, integra com traducao automatica
+      e mantem consistencia entre secoes relacionadas.
+
+    keywords:
+      triggers:
+        - "adicionar", "add", "novo", "nova", "criar"
+        - "editar", "edit", "alterar", "modificar", "atualizar"
+        - "remover", "remove", "excluir", "deletar", "apagar"
+        - "reordenar", "mover", "ordenar", "priorizar"
+        - "experiencia", "certificado", "publicacao", "premio"
+        - "educacao", "skill", "idioma", "projeto", "voluntario"
+      capabilities:
+        - "crud_operations", "data_management"
+        - "inline_validation", "auto_translation"
+        - "context_suggestions", "consistency_check"
+      outputs:
+        - "updated_cv", "validation_result", "change_summary"
+
+    complexity: "medium"
+    typical_tokens: 1000-3000
+
+    # ============================================================
+    # SECOES SUPORTADAS - COBERTURA COMPLETA DO CV
+    # ============================================================
+    supported_sections:
+
+      # --- SECOES PRINCIPAIS (JSON Resume Standard) ---
+      basics:
+        description: "Informacoes pessoais e de contato"
+        editable_fields:
+          - { name: "name", type: "string", required: true }
+          - { name: "label", type: "string", required: true }
+          - { name: "email", type: "email", required: true }
+          - { name: "phone", type: "phone", required: false }
+          - { name: "url", type: "url", required: false }
+          - { name: "summary", type: "text", required: true, max_length: 500 }
+          - { name: "image", type: "url", required: false }
+          - { name: "location", type: "object", subfields: ["address", "postalCode", "city", "countryCode", "region"] }
+          - { name: "profiles", type: "array", subfields: ["network", "username", "url"] }
+
+      work:
+        description: "Experiencias profissionais"
+        id_pattern: "work-XXX"
+        editable_fields:
+          - { name: "name", type: "string", required: true, desc: "Nome da empresa" }
+          - { name: "position", type: "string", required: true, desc: "Cargo ocupado" }
+          - { name: "location", type: "string", required: false }
+          - { name: "url", type: "url", required: false }
+          - { name: "startDate", type: "date", required: true, format: "YYYY-MM-DD" }
+          - { name: "endDate", type: "date", required: false, nullable: true }
+          - { name: "summary", type: "text", required: true }
+          - { name: "highlights", type: "array[string]", required: true, min_items: 3 }
+          - { name: "keywords", type: "array[string]", required: false }
+
+      education:
+        description: "Formacao academica"
+        id_pattern: "edu-XXX"
+        editable_fields:
+          - { name: "institution", type: "string", required: true }
+          - { name: "area", type: "string", required: true }
+          - { name: "studyType", type: "enum", values: ["Graduacao", "Pos-Graduacao", "Mestrado", "Doutorado", "MBA", "Tecnico"], required: true }
+          - { name: "startDate", type: "date", required: true }
+          - { name: "endDate", type: "date", required: false }
+          - { name: "score", type: "string", required: false }
+          - { name: "courses", type: "array[string]", required: false }
+
+      skills:
+        description: "Habilidades tecnicas e comportamentais"
+        id_pattern: "skill-XXX"
+        editable_fields:
+          - { name: "name", type: "string", required: true, desc: "Categoria" }
+          - { name: "level", type: "enum", values: ["Beginner", "Intermediate", "Advanced", "Expert", "Master"], required: false }
+          - { name: "keywords", type: "array[string]", required: true }
+
+      certificates:
+        description: "Certificacoes profissionais"
+        id_pattern: "cert-XXX"
+        editable_fields:
+          - { name: "name", type: "string", required: true }
+          - { name: "issuer", type: "string", required: true }
+          - { name: "date", type: "date", required: true }
+          - { name: "url", type: "url", required: false }
+          - { name: "id", type: "string", required: false, desc: "Numero do certificado" }
+
+      awards:
+        description: "Premios e reconhecimentos"
+        id_pattern: "award-XXX"
+        editable_fields:
+          - { name: "title", type: "string", required: true }
+          - { name: "awarder", type: "string", required: true }
+          - { name: "date", type: "date", required: true }
+          - { name: "summary", type: "text", required: false }
+
+      publications:
+        description: "Publicacoes cientificas e tecnicas"
+        id_pattern: "pub-XXX"
+        editable_fields:
+          - { name: "name", type: "string", required: true }
+          - { name: "publisher", type: "string", required: true }
+          - { name: "releaseDate", type: "date", required: true }
+          - { name: "url", type: "url", required: false }
+          - { name: "summary", type: "text", required: false }
+
+      projects:
+        description: "Projetos pessoais ou profissionais"
+        id_pattern: "proj-XXX"
+        editable_fields:
+          - { name: "name", type: "string", required: true }
+          - { name: "description", type: "text", required: true }
+          - { name: "url", type: "url", required: false }
+          - { name: "startDate", type: "date", required: false }
+          - { name: "endDate", type: "date", required: false }
+          - { name: "highlights", type: "array[string]", required: false }
+          - { name: "keywords", type: "array[string]", required: false }
+          - { name: "roles", type: "array[string]", required: false }
+          - { name: "entity", type: "string", required: false }
+          - { name: "type", type: "enum", values: ["Personal", "Professional", "OpenSource", "Academic", "Volunteer"], required: false }
+
+      languages:
+        description: "Idiomas e niveis de proficiencia"
+        id_pattern: "lang-XXX"
+        editable_fields:
+          - { name: "language", type: "string", required: true }
+          - { name: "fluency", type: "enum", values: ["Native", "Fluent", "Professional", "Intermediate", "Basic"], required: true }
+
+      volunteer:
+        description: "Trabalho voluntario"
+        id_pattern: "vol-XXX"
+        editable_fields:
+          - { name: "organization", type: "string", required: true }
+          - { name: "position", type: "string", required: true }
+          - { name: "url", type: "url", required: false }
+          - { name: "startDate", type: "date", required: true }
+          - { name: "endDate", type: "date", required: false }
+          - { name: "summary", type: "text", required: false }
+          - { name: "highlights", type: "array[string]", required: false }
+
+      interests:
+        description: "Interesses e hobbies"
+        id_pattern: "int-XXX"
+        editable_fields:
+          - { name: "name", type: "string", required: true }
+          - { name: "keywords", type: "array[string]", required: false }
+
+      references:
+        description: "Referencias profissionais"
+        id_pattern: "ref-XXX"
+        editable_fields:
+          - { name: "name", type: "string", required: true }
+          - { name: "reference", type: "text", required: true }
+
+      # --- SECOES CUSTOMIZADAS (Extensoes x-) ---
+      x-atsData:
+        description: "Dados otimizados para ATS"
+        editable_fields:
+          - { name: "keywords.primary", type: "array[string]" }
+          - { name: "keywords.technical", type: "array[string]" }
+          - { name: "keywords.soft", type: "array[string]" }
+          - { name: "keywords.methodologies", type: "array[string]" }
+          - { name: "keywords.industries", type: "array[string]" }
+          - { name: "achievements", type: "array[object]" }
+
+      x-custom:
+        description: "Objetivos e informacoes customizadas"
+        editable_fields:
+          - { name: "objectives", type: "array[string]" }
+          - { name: "availability", type: "string" }
+          - { name: "salary_expectation", type: "string" }
+          - { name: "timeline", type: "array[object]" }
+
+      meta:
+        description: "Metadados do CV (edicao restrita)"
+        editable_fields:
+          - { name: "version", type: "semver", auto_increment: true }
+          - { name: "lastModified", type: "datetime", auto_update: true }
+          - { name: "language", type: "locale" }
+          - { name: "locales", type: "array[locale]" }
+
+    # ============================================================
+    # OPERACOES CRUD
+    # ============================================================
+    operations:
+
+      add:
+        command: "/cv-add"
+        syntax: "/cv-add <section> [--interactive]"
+        examples:
+          - "/cv-add work"
+          - "/cv-add certificate"
+          - "/cv-add skill"
+          - "/cv-add project --interactive"
+        model_hint: "sonnet"  # Modo interativo requer contexto
+
+      edit:
+        command: "/cv-edit"
+        syntax: "/cv-edit <id|section> [--field <field>] [--value <value>]"
+        examples:
+          - "/cv-edit work-001"
+          - "/cv-edit cert-003 --field date --value 2025-06-15"
+          - "/cv-edit basics --field summary"
+        model_hint: "haiku"  # Edicao direta e simples
+
+      remove:
+        command: "/cv-remove"
+        syntax: "/cv-remove <id> [--force]"
+        examples:
+          - "/cv-remove award-002"
+          - "/cv-remove work-005 --force"
+        model_hint: "haiku"
+
+      reorder:
+        command: "/cv-reorder"
+        syntax: "/cv-reorder <section> [--by date|relevance|alphabetical] [--manual]"
+        examples:
+          - "/cv-reorder work --by date"
+          - "/cv-reorder skills --by relevance"
+        model_hint: "haiku"  # Sonnet se --by relevance
+
+      list:
+        command: "/cv-list"
+        syntax: "/cv-list <section|all> [--format table|json|summary]"
+        examples:
+          - "/cv-list work"
+          - "/cv-list all --format summary"
+        model_hint: "haiku"
+
+    # ============================================================
+    # TAREFAS POR COMPLEXIDADE
+    # ============================================================
+    tasks:
+      simple:  # 🟢 Haiku
+        - "Listar entradas de uma secao"
+        - "Remover entrada por ID"
+        - "Editar campo unico com valor fornecido"
+        - "Reordenar por data ou alfabetico"
+
+      moderate:  # 🟡 Sonnet
+        - "Adicionar entrada no modo interativo"
+        - "Editar multiplos campos simultaneamente"
+        - "Sugerir preenchimento baseado em contexto"
+        - "Reordenar por relevancia"
+        - "Validar consistencia entre secoes"
+
+      complex:  # 🔴 Opus
+        - "Inferir dados de descricao em texto livre"
+        - "Detectar e resolver duplicatas semanticas"
+        - "Sugerir melhorias durante edicao"
+
+    # ============================================================
+    # INTEGRACOES COM OUTROS AGENTES
+    # ============================================================
+    integrations:
+      validator:
+        trigger: "after_each_operation"
+        mode: "sync"
+        purpose: "Validar schema e regras de negocio"
+
+      translator:
+        trigger: "after_add_or_edit"
+        condition: "i18n_enabled"
+        mode: "async"
+        purpose: "Auto-traduzir novos conteudos"
+
+      enricher:
+        trigger: "after_add"
+        condition: "section in [work, projects]"
+        mode: "optional"
+        purpose: "Sugerir keywords ATS"
+
+    checkpoint: "CP-EDIT"
 ```
 
 ### 2.5 Regras de Escalonamento de Modelo
@@ -1099,6 +1392,104 @@ flow_orchestrators:
       - "Push para remoto"
 
     checkpoints: ["CP-06"]
+
+  # ============================================================
+  # EDIT FLOW - Fluxo de Edicao de Dados
+  # ============================================================
+  edit:
+    name: "EditFlowOrchestrator"
+    model: "sonnet"  # 🟡 Coordenacao requer entendimento de contexto
+
+    description: |
+      Coordena operacoes de edicao (CRUD) em todas as secoes do CV.
+      Gerencia validacao em tempo real, auto-traducao, e consistencia
+      entre secoes relacionadas. Suporta modo interativo e batch.
+
+    keywords:
+      triggers:
+        - "adicionar", "editar", "remover"
+        - "modificar", "atualizar", "criar"
+        - "novo", "alterar", "excluir"
+      domain: "edit"
+
+    managed_agents:
+      - agent: "EditorAgent"
+        role: "executor_principal"
+        model: "sonnet"
+      - agent: "ValidatorAgent"
+        role: "validador_inline"
+        model: "haiku"
+      - agent: "TranslatorAgent"
+        role: "tradutor_auto"
+        model: "sonnet"
+        condition: "i18n_enabled"
+      - agent: "EnricherAgent"
+        role: "sugestor_keywords"
+        model: "sonnet"
+        condition: "section in [work, projects]"
+
+    direct_communication:
+      - from: "EditorAgent"
+        to: "ValidatorAgent"
+        type: "sync"
+        purpose: "Validar cada campo durante edicao"
+        trigger: "field_changed"
+
+      - from: "EditorAgent"
+        to: "TranslatorAgent"
+        type: "async"
+        purpose: "Traduzir conteudo adicionado/editado"
+        trigger: "entry_saved && i18n_enabled"
+
+      - from: "EditorAgent"
+        to: "EnricherAgent"
+        type: "optional"
+        purpose: "Sugerir keywords ATS para experiencias"
+        trigger: "section == work || section == projects"
+
+    parallel_tasks:
+      - "Validar campos independentes"
+      - "Verificar unicidade de IDs"
+      - "Checar formatos (email, URL, data)"
+
+    sequential_tasks:
+      - "Receber comando de edicao"
+      - "Localizar secao/entrada"
+      - "Coletar dados (interativo ou direto)"
+      - "Validar campos obrigatorios"
+      - "Aplicar alteracoes"
+      - "Atualizar traducoes (se i18n)"
+      - "Validar schema completo"
+      - "Retornar confirmacao"
+
+    supported_operations:
+      - operation: "add"
+        command: "/cv-add <section>"
+        description: "Adicionar nova entrada"
+      - operation: "edit"
+        command: "/cv-edit <id>"
+        description: "Editar entrada existente"
+      - operation: "remove"
+        command: "/cv-remove <id>"
+        description: "Remover entrada"
+      - operation: "reorder"
+        command: "/cv-reorder <section>"
+        description: "Reordenar entradas"
+      - operation: "list"
+        command: "/cv-list <section>"
+        description: "Listar entradas"
+
+    checkpoints: ["CP-EDIT", "CP-06"]
+
+    flow_diagram: |
+      Usuario ─► EditFlowOrchestrator
+                        │
+           ┌────────────┼────────────┐
+           ▼            ▼            ▼
+      EditorAgent ─► Validator ─► Translator
+           │            ▲            │
+           └────────────┴────────────┘
+                   feedback
 ```
 
 ### 3.3 Regras de Comunicacao Direta entre Agentes
@@ -4104,12 +4495,63 @@ Usuario: /cv-status
 
 ## Apendice C: Roadmap
 
-| Versao | Features | Status |
-|--------|----------|--------|
-| 1.0 | Core agents + skills basicas | Planejado |
-| 1.1 | HistoryManager + rollback | Planejado |
-| 1.2 | TemplateManager | Planejado |
-| 1.3 | MetricsCollector | Planejado |
-| 2.0 | LinkedIn integration | Futuro |
-| 2.1 | Job boards integration | Futuro |
-| 3.0 | Web interface | Futuro |
+| Versao | Features | Descricao | Status |
+|--------|----------|-----------|--------|
+| 1.0 | Core agents + skills basicas | Orquestrador, Subagentes, Skills principais | Planejado |
+| 1.1 | **CustomizerAgent++** | Cover letter automatica, simulacao de score ATS, sugestoes de melhoria por vaga | **Prioridade** |
+| 1.2 | **EditorAgent** | CRUD de entradas do CV (work, certificates, publications, etc.) | **Prioridade** |
+| 1.3 | HistoryManager + rollback | Versionamento interno, diff entre versoes, rollback granular | Planejado |
+| 1.4 | TemplateManager | Gestao de templates customizados, preview, themes | Planejado |
+| 1.5 | MetricsCollector | Metricas de uso, analytics, relatorios de qualidade | Planejado |
+| 2.0 | LinkedIn integration | Importar/exportar perfil LinkedIn, sync bidirecional | Futuro |
+| 2.1 | Job boards integration | Indeed, Glassdoor, LinkedIn Jobs - aplicacao automatica | Futuro |
+| 3.0 | Web interface | Dashboard visual para edicao e gestao do CV | Futuro |
+
+### Detalhamento das Prioridades
+
+#### CustomizerAgent++ (v1.1)
+```yaml
+features:
+  cover_letter:
+    - Geracao automatica baseada no CV e descricao da vaga
+    - Templates por tipo (formal, moderno, tecnico)
+    - Personalizacao por empresa/cultura
+    - Suporte i18n (pt-BR, en-US)
+
+  ats_simulation:
+    - Simular parsing por ATS populares (Workday, Greenhouse, Lever)
+    - Score de compatibilidade por sistema
+    - Sugestoes de otimizacao especificas
+    - Identificar keywords faltantes
+
+  job_matching:
+    - Analise profunda de requisitos da vaga
+    - Gap analysis com recomendacoes
+    - Reordenacao inteligente de experiencias
+    - Highlight automatico de skills relevantes
+```
+
+#### EditorAgent (v1.2)
+```yaml
+features:
+  crud_operations:
+    - /cv-add [section] - Adicionar nova entrada
+    - /cv-edit [id] - Editar entrada existente
+    - /cv-remove [id] - Remover entrada
+    - /cv-reorder [section] - Reordenar entradas
+
+  supported_sections:
+    - work (experiencias profissionais)
+    - education (formacao)
+    - certificates (certificacoes)
+    - awards (premios)
+    - publications (publicacoes)
+    - skills (habilidades)
+    - projects (projetos)
+
+  features:
+    - Validacao em tempo real durante edicao
+    - Sugestoes de preenchimento baseadas em contexto
+    - Auto-traducao para idiomas configurados
+    - Preview antes de salvar
+```
